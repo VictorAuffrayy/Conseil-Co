@@ -1,0 +1,1389 @@
+{
+  "users": [
+    {
+      "id": "admin-001",
+      "email": "admin@conseilandco.fr",
+      "password": "admin123",
+      "name": "Administrateur",
+      "role": "admin",
+      "subscriptions": [],
+      "favorites": [],
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "TK1f0u4l12E",
+      "name": "Victor",
+      "email": "victor.auffrayy@gmail.com",
+      "password": "Stylo92500",
+      "role": "user",
+      "subscriptions": [],
+      "favorites": [
+        {
+          "title": "Anthropic supplie Donald Trump de réguler l’IA (la raison va vous terrifier)",
+          "link": "https://www.lebigdata.fr/anthropic-supplie-donald-trump-de-reguler-lia-la-raison-va-vous-terrifier",
+          "description": "L&#8217;intelligence artificielle (IA) progresse à une vitesse fulgurante. Certains modèles plus que d’autres… Or, la réglementation n’arrive pas à suivre. &#8230;\nCet article Anthropic supplie Donald Trump de réguler l&rsquo;IA (la raison va vous terrifier)  a été publié sur LEBIGDATA.FR.",
+          "fullDescription": "L&#8217;intelligence artificielle (IA) progresse à une vitesse fulgurante. Certains modèles plus que d’autres… Or, la réglementation n’arrive pas à suivre. &#8230;\nCet article Anthropic supplie Donald Trump de réguler l&rsquo;IA (la raison va vous terrifier)  a été publié sur LEBIGDATA.FR.",
+          "pubDate": "2026-06-11T04:34:12.000Z",
+          "pubDateFormatted": "jeudi 11 juin 2026",
+          "pubTimeFormatted": "06:34",
+          "source": "Le Big Data",
+          "category": "Intelligence artificielle",
+          "author": "",
+          "relevanceScore": 95,
+          "id": "t01-aHR0cHMlM0ElMkYl",
+          "topicId": "t01",
+          "savedAt": "2026-06-11T20:08:17.822Z"
+        }
+      ],
+      "createdAt": "2026-05-19T13:22:28.631Z"
+    }
+  ],
+  "topics": [
+    {
+      "id": "t01",
+      "slug": "intelligence-artificielle",
+      "label": "Intelligence artificielle",
+      "description": "IA générative, LLM, automatisation et impacts business.",
+      "category": "Tech"
+    },
+    {
+      "id": "t02",
+      "slug": "cybersecurite",
+      "label": "Cybersécurité",
+      "description": "Menaces, RGPD, gouvernance des données et protection.",
+      "category": "Tech"
+    },
+    {
+      "id": "t03",
+      "slug": "transformation-digitale",
+      "label": "Transformation digitale",
+      "description": "DSI, cloud, ERP, conduite du changement.",
+      "category": "Tech"
+    },
+    {
+      "id": "t04",
+      "slug": "rh-future-of-work",
+      "label": "RH & Future of work",
+      "description": "Télétravail, GPEC, bien-être au travail, recrutement.",
+      "category": "RH"
+    },
+    {
+      "id": "t05",
+      "slug": "finance-marches",
+      "label": "Finance & marchés",
+      "description": "M&A, private equity, marchés financiers, trésorerie.",
+      "category": "Finance"
+    },
+    {
+      "id": "t06",
+      "slug": "droit-affaires",
+      "label": "Droit des affaires",
+      "description": "Contrats, contentieux, fusions, droit social.",
+      "category": "Juridique"
+    },
+    {
+      "id": "t07",
+      "slug": "esg-rse",
+      "label": "ESG / RSE",
+      "description": "Développement durable, reporting extra-financier, CSRD.",
+      "category": "Stratégie"
+    },
+    {
+      "id": "t08",
+      "slug": "supply-chain",
+      "label": "Supply chain",
+      "description": "Logistique, gestion des stocks, résilience des chaînes.",
+      "category": "Opérations"
+    },
+    {
+      "id": "t09",
+      "slug": "marketing-growth",
+      "label": "Marketing & growth",
+      "description": "Performance, acquisition, brand, marketing digital.",
+      "category": "Marketing"
+    },
+    {
+      "id": "t10",
+      "slug": "management-leadership",
+      "label": "Management & leadership",
+      "description": "Gouvernance, culture d'entreprise, performance des équipes.",
+      "category": "RH"
+    },
+    {
+      "id": "t11",
+      "slug": "startups-innovation",
+      "label": "Startups & innovation",
+      "description": "Ecosystème startup, levées de fonds, innovation ouverte.",
+      "category": "Stratégie"
+    },
+    {
+      "id": "t12",
+      "slug": "immobilier",
+      "label": "Immobilier",
+      "description": "Marché résidentiel, CRE, investissement, urbanisme.",
+      "category": "Finance"
+    },
+    {
+      "id": "t13",
+      "slug": "sante-medtech",
+      "label": "Santé & medtech",
+      "description": "Santé numérique, dispositifs médicaux, biotech.",
+      "category": "Secteur"
+    },
+    {
+      "id": "t14",
+      "slug": "energie",
+      "label": "Énergie",
+      "description": "Transition énergétique, renouvelables, marché de l'énergie.",
+      "category": "Secteur"
+    },
+    {
+      "id": "t15",
+      "slug": "regulation-compliance",
+      "label": "Régulation & compliance",
+      "description": "DORA, AI Act, NIS2, conformité réglementaire.",
+      "category": "Juridique"
+    },
+    {
+      "id": "t16",
+      "slug": "data-analytics",
+      "label": "Data & analytics",
+      "description": "Data science, BI, data governance, DataOps.",
+      "category": "Tech"
+    },
+    {
+      "id": "t17",
+      "slug": "ecommerce-retail",
+      "label": "E-commerce & retail",
+      "description": "Commerce unifié, marketplaces, expérience client.",
+      "category": "Marketing"
+    },
+    {
+      "id": "t18",
+      "slug": "geopolitique-economie",
+      "label": "Géopolitique & économie",
+      "description": "Macro-économie, tensions internationales, souveraineté.",
+      "category": "Stratégie"
+    },
+    {
+      "id": "t19",
+      "slug": "design-thinking",
+      "label": "Design thinking",
+      "description": "UX, innovation centrée utilisateur, service design.",
+      "category": "Stratégie"
+    },
+    {
+      "id": "t20",
+      "slug": "industrie-manufacturing",
+      "label": "Industrie & manufacturing",
+      "description": "Industrie 4.0, robotique, lean manufacturing.",
+      "category": "Opérations"
+    }
+  ],
+  "articles": [
+    {
+      "id": "a-t01-01",
+      "topicId": "t01",
+      "relevanceScore": 97,
+      "title": "GPT-5 : OpenAI dévoile ses capacités de raisonnement avancé",
+      "description": "OpenAI a présenté GPT-5, son nouveau modèle capable de raisonnement multi-étapes et de résolution de problèmes complexes, surpassant les benchmarks précédents en mathématiques et en code.",
+      "link": "https://openai.com/blog",
+      "source": "OpenAI Blog",
+      "pubDate": "28 avr. 2025"
+    },
+    {
+      "id": "a-t01-02",
+      "topicId": "t01",
+      "relevanceScore": 94,
+      "title": "L'IA générative transforme les cabinets de conseil : McKinsey publie son rapport annuel",
+      "description": "McKinsey estime que 70% des tâches analytiques des consultants pourraient être automatisées d'ici 2027 grâce aux LLM, redessinant profondément les modèles de facturation.",
+      "link": "https://www.mckinsey.com/capabilities/quantumblack/our-insights",
+      "source": "McKinsey & Company",
+      "pubDate": "25 avr. 2025"
+    },
+    {
+      "id": "a-t01-03",
+      "topicId": "t01",
+      "relevanceScore": 91,
+      "title": "Claude 4 d'Anthropic : les entreprises françaises adoptent massivement l'IA souveraine",
+      "description": "Anthropic annonce un partenariat stratégique avec plusieurs grands groupes français pour déployer Claude 4 dans des environnements cloud souverains conformes au RGPD.",
+      "link": "https://www.anthropic.com",
+      "source": "Anthropic",
+      "pubDate": "22 avr. 2025"
+    },
+    {
+      "id": "a-t01-04",
+      "topicId": "t01",
+      "relevanceScore": 88,
+      "title": "AI Act européen : les premières obligations entrent en vigueur",
+      "description": "L'Union Européenne active les premières dispositions de l'AI Act. Les entreprises utilisant des systèmes d'IA à haut risque disposent de 6 mois pour se conformer.",
+      "link": "https://digital-strategy.ec.europa.eu",
+      "source": "Commission Européenne",
+      "pubDate": "20 avr. 2025"
+    },
+    {
+      "id": "a-t01-05",
+      "topicId": "t01",
+      "relevanceScore": 85,
+      "title": "Mistral AI lève 600 millions d'euros et valorise à 6 milliards",
+      "description": "La pépite française de l'IA réalise une nouvelle levée record pour accélérer le développement de ses modèles ouverts et renforcer ses équipes de recherche.",
+      "link": "https://mistral.ai",
+      "source": "Mistral AI",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t01-06",
+      "topicId": "t01",
+      "relevanceScore": 82,
+      "title": "Les agents IA autonomes : état de l'art et risques pour les entreprises",
+      "description": "Une analyse complète des agents IA capables d'agir de manière autonome dans des environnements complexes, leurs cas d'usage en entreprise et les risques associés.",
+      "link": "https://www.journaldunet.com",
+      "source": "Journal du Net",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t02-01",
+      "topicId": "t02",
+      "relevanceScore": 96,
+      "title": "Ransomware : recrudescence des attaques contre les ETI françaises au T1 2025",
+      "description": "L'ANSSI publie son rapport trimestriel : +43% d'incidents ransomware ciblant les entreprises de taille intermédiaire, avec des demandes de rançon moyennes en hausse de 70%.",
+      "link": "https://www.cert.ssi.gouv.fr",
+      "source": "ANSSI / CERT-FR",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t02-02",
+      "topicId": "t02",
+      "relevanceScore": 93,
+      "title": "NIS2 : comment les entreprises françaises se préparent à la directive",
+      "description": "La directive NIS2 impose de nouvelles obligations de sécurité à plus de 10 000 entités françaises. Tour d'horizon des mesures à mettre en place avant la date limite.",
+      "link": "https://www.ssi.gouv.fr",
+      "source": "ANSSI",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t02-03",
+      "topicId": "t02",
+      "relevanceScore": 90,
+      "title": "Deepfake et fraude au président : nouvelles techniques d'attaque par IA",
+      "description": "Les cybercriminels utilisent désormais des clones vocaux et vidéo générés par IA pour tromper les DAF et déclencher des virements frauduleux. Plusieurs cas documentés en France.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t02-04",
+      "topicId": "t02",
+      "relevanceScore": 87,
+      "title": "Zero Trust Architecture : le nouveau standard de sécurité pour les grands groupes",
+      "description": "L'approche Zero Trust s'impose comme la référence pour sécuriser les infrastructures hybrides. Retour d'expérience de 5 grandes entreprises françaises ayant migré leur SI.",
+      "link": "https://www.silicon.fr",
+      "source": "Silicon.fr",
+      "pubDate": "19 avr. 2025"
+    },
+    {
+      "id": "a-t02-05",
+      "topicId": "t02",
+      "relevanceScore": 84,
+      "title": "DORA entre en vigueur : les établissements financiers face au défi de la résilience numérique",
+      "description": "Le règlement européen DORA est désormais applicable. Les banques et assurances doivent démontrer leur capacité à résister aux incidents informatiques majeurs.",
+      "link": "https://www.banque-france.fr",
+      "source": "Banque de France",
+      "pubDate": "17 avr. 2025"
+    },
+    {
+      "id": "a-t02-06",
+      "topicId": "t02",
+      "relevanceScore": 81,
+      "title": "Vulnérabilités critiques dans les VPN d'entreprise : patch urgent recommandé",
+      "description": "Plusieurs éditeurs de solutions VPN ont publié des correctifs d'urgence suite à la découverte de failles critiques permettant l'exécution de code à distance.",
+      "link": "https://www.cert.ssi.gouv.fr",
+      "source": "CERT-FR",
+      "pubDate": "14 avr. 2025"
+    },
+    {
+      "id": "a-t03-01",
+      "topicId": "t03",
+      "relevanceScore": 95,
+      "title": "Cloud souverain : Bleu obtient la qualification SecNumCloud",
+      "description": "La plateforme cloud franco-française Bleu obtient la qualification de l'ANSSI, ouvrant la voie aux données sensibles des administrations et des entreprises régulées.",
+      "link": "https://www.capgemini.com",
+      "source": "Capgemini",
+      "pubDate": "26 avr. 2025"
+    },
+    {
+      "id": "a-t03-02",
+      "topicId": "t03",
+      "relevanceScore": 92,
+      "title": "SAP S/4HANA : les leçons des migrations les plus réussies en 2024-2025",
+      "description": "Analyse de 50 projets de migration SAP S/4HANA : les facteurs clés de succès, les pièges à éviter et les nouvelles fonctionnalités IA intégrées à la plateforme.",
+      "link": "https://www.sap.com/france",
+      "source": "SAP France",
+      "pubDate": "23 avr. 2025"
+    },
+    {
+      "id": "a-t03-03",
+      "topicId": "t03",
+      "relevanceScore": 89,
+      "title": "La dette technique des DSI françaises : un frein majeur à la transformation",
+      "description": "Une étude IDC révèle que 68% des DSI français consacrent plus de 60% de leur budget à maintenir des systèmes legacy, limitant leur capacité d'innovation.",
+      "link": "https://www.idc.com",
+      "source": "IDC",
+      "pubDate": "20 avr. 2025"
+    },
+    {
+      "id": "a-t03-04",
+      "topicId": "t03",
+      "relevanceScore": 86,
+      "title": "Hyperautomatisation : RPA, IA et process mining au service des opérations",
+      "description": "Comment les entreprises leaders combinent RPA, IA et process mining pour automatiser leurs processus métier et réduire leurs coûts opérationnels de 30 à 50%.",
+      "link": "https://www.journaldunet.com",
+      "source": "Journal du Net",
+      "pubDate": "17 avr. 2025"
+    },
+    {
+      "id": "a-t03-05",
+      "topicId": "t03",
+      "relevanceScore": 83,
+      "title": "Microsoft 365 Copilot : bilan après un an de déploiement dans les grandes entreprises",
+      "description": "Premier bilan chiffré de Microsoft 365 Copilot : gains de productivité mesurés, limites observées et retours d'expérience de 10 groupes du CAC 40.",
+      "link": "https://www.microsoft.com/fr-fr",
+      "source": "Microsoft France",
+      "pubDate": "14 avr. 2025"
+    },
+    {
+      "id": "a-t03-06",
+      "topicId": "t03",
+      "relevanceScore": 80,
+      "title": "FinOps : maîtriser les coûts cloud devient une priorité stratégique",
+      "description": "Face à l'explosion des factures cloud, les entreprises structurent des équipes FinOps et adoptent des plateformes de gestion des dépenses cloud pour retrouver la maîtrise.",
+      "link": "https://www.silicon.fr",
+      "source": "Silicon.fr",
+      "pubDate": "11 avr. 2025"
+    },
+    {
+      "id": "a-t04-01",
+      "topicId": "t04",
+      "relevanceScore": 95,
+      "title": "Télétravail en 2025 : les nouvelles règles du jeu entre employeurs et salariés",
+      "description": "Les accords de télétravail sont renégociés dans la majorité des grandes entreprises françaises. 2-3 jours par semaine s'impose comme la norme dominante.",
+      "link": "https://www.focusrh.com",
+      "source": "Focus RH",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t04-02",
+      "topicId": "t04",
+      "relevanceScore": 92,
+      "title": "Pénurie de talents tech : les stratégies gagnantes des entreprises pour recruter",
+      "description": "Face à la guerre des talents dans les métiers du numérique, les entreprises adoptent de nouvelles stratégies : formation interne, partenariats écoles, sourcing international.",
+      "link": "https://www.rh-info.fr",
+      "source": "RH Info",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t04-03",
+      "topicId": "t04",
+      "relevanceScore": 89,
+      "title": "Burn-out et santé mentale au travail : l'entreprise face à ses responsabilités",
+      "description": "La santé mentale des salariés devient un enjeu RH prioritaire. Les DRH déploient des programmes de prévention et de soutien psychologique avec des résultats mesurables.",
+      "link": "https://www.focusrh.com",
+      "source": "Focus RH",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t04-04",
+      "topicId": "t04",
+      "relevanceScore": 86,
+      "title": "GPEC et GEPP : anticiper les évolutions de compétences à l'ère de l'IA",
+      "description": "L'IA redessine les cartographies de compétences. Les DRH doivent anticiper les métiers qui vont disparaître, évoluer ou émerger pour adapter leurs plans de formation.",
+      "link": "https://www.rh-info.fr",
+      "source": "RH Info",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t04-05",
+      "topicId": "t04",
+      "relevanceScore": 83,
+      "title": "Génération Z en entreprise : adapter le management et les outils de collaboration",
+      "description": "Les moins de 28 ans représentent 25% de la population active. Leurs attentes bousculent les pratiques managériales en matière de sens, d'autonomie et d'outils digitaux.",
+      "link": "https://www.hbrfrance.fr",
+      "source": "HBR France",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t04-06",
+      "topicId": "t04",
+      "relevanceScore": 80,
+      "title": "Index égalité professionnelle 2025 : les entreprises progressent mais l'écart persiste",
+      "description": "Les résultats de l'index 2025 montrent une légère amélioration globale mais les écarts de rémunération et d'accès aux postes de direction restent significatifs.",
+      "link": "https://www.focusrh.com",
+      "source": "Focus RH",
+      "pubDate": "12 avr. 2025"
+    },
+    {
+      "id": "a-t05-01",
+      "topicId": "t05",
+      "relevanceScore": 96,
+      "title": "CAC 40 : résultats T1 2025, les valeurs tech tirent la croissance",
+      "description": "Les entreprises technologiques du CAC 40 affichent une progression de leurs bénéfices de 18% au T1 2025, portées par la demande en solutions IA et cloud.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "28 avr. 2025"
+    },
+    {
+      "id": "a-t05-02",
+      "topicId": "t05",
+      "relevanceScore": 93,
+      "title": "Private equity : le marché français repart après 18 mois de contraction",
+      "description": "Les fonds de private equity enregistrent une reprise significative des opérations au T1 2025, avec un focus sur les entreprises tech, santé et infrastructure verte.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "25 avr. 2025"
+    },
+    {
+      "id": "a-t05-03",
+      "topicId": "t05",
+      "relevanceScore": 90,
+      "title": "BCE : maintien des taux directeurs, baisse anticipée en juin",
+      "description": "La BCE maintient ses taux à 3,25%. Les marchés intègrent à 80% de probabilité une baisse de 25 bps en juin suite aux signaux d'inflation maîtrisée.",
+      "link": "https://www.ecb.europa.eu",
+      "source": "BCE",
+      "pubDate": "22 avr. 2025"
+    },
+    {
+      "id": "a-t05-04",
+      "topicId": "t05",
+      "relevanceScore": 87,
+      "title": "M&A : les mega-deals font leur retour en Europe, portés par la consolidation tech",
+      "description": "Le marché des fusions-acquisitions européen repart à la hausse avec plusieurs méga-transactions dans la tech et les télécoms. Analyse des valorisations et multiples observés.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "19 avr. 2025"
+    },
+    {
+      "id": "a-t05-05",
+      "topicId": "t05",
+      "relevanceScore": 84,
+      "title": "Obligations vertes : la France devient premier émetteur souverain en Europe",
+      "description": "La France consolide sa position de leader en matière d'obligations vertes souveraines avec une nouvelle émission de 10 milliards d'euros sursouscrite 4 fois.",
+      "link": "https://www.tresor.economie.gouv.fr",
+      "source": "Trésor Public",
+      "pubDate": "16 avr. 2025"
+    },
+    {
+      "id": "a-t05-06",
+      "topicId": "t05",
+      "relevanceScore": 81,
+      "title": "Inflation zone euro : retour à 2%, fin du cycle de restriction monétaire",
+      "description": "L'inflation en zone euro atteint 2,1% en mars 2025, se rapprochant de l'objectif BCE. Ce chiffre conforte les anticipations de détente monétaire pour le second semestre.",
+      "link": "https://ec.europa.eu/eurostat",
+      "source": "Eurostat",
+      "pubDate": "13 avr. 2025"
+    },
+    {
+      "id": "a-t06-01",
+      "topicId": "t06",
+      "relevanceScore": 95,
+      "title": "Réforme du droit des contrats : les nouvelles clauses incontournables en 2025",
+      "description": "Suite aux dernières évolutions jurisprudentielles, les praticiens identifient les clauses à intégrer systématiquement dans les contrats commerciaux.",
+      "link": "https://www.village-justice.com",
+      "source": "Village de la Justice",
+      "pubDate": "26 avr. 2025"
+    },
+    {
+      "id": "a-t06-02",
+      "topicId": "t06",
+      "relevanceScore": 92,
+      "title": "Droit social : ce qui change au 1er mai 2025 pour les employeurs",
+      "description": "Hausse du SMIC, nouvelles règles sur la rupture conventionnelle collective et obligations de formation : le point complet sur les évolutions sociales du 1er mai.",
+      "link": "https://www.village-justice.com",
+      "source": "Village de la Justice",
+      "pubDate": "23 avr. 2025"
+    },
+    {
+      "id": "a-t06-03",
+      "topicId": "t06",
+      "relevanceScore": 89,
+      "title": "Arbitrage international : Paris confirme son attractivité face à Londres post-Brexit",
+      "description": "La CCI confirme la progression de Paris comme place d'arbitrage privilégiée. Le nombre de dossiers traités a augmenté de 22% en 2024.",
+      "link": "https://iccwbo.org",
+      "source": "ICC",
+      "pubDate": "20 avr. 2025"
+    },
+    {
+      "id": "a-t06-04",
+      "topicId": "t06",
+      "relevanceScore": 86,
+      "title": "IA et responsabilité juridique : qui répond des décisions des algorithmes ?",
+      "description": "La question de la responsabilité civile et pénale des systèmes d'IA autonomes s'impose dans les tribunaux. Analyse des premières décisions jurisprudentielles en Europe.",
+      "link": "https://www.dalloz-actualite.fr",
+      "source": "Dalloz Actualité",
+      "pubDate": "17 avr. 2025"
+    },
+    {
+      "id": "a-t06-05",
+      "topicId": "t06",
+      "relevanceScore": 83,
+      "title": "Directive CS3D : obligations de diligence raisonnable pour les grandes entreprises",
+      "description": "La directive européenne CS3D impose aux entreprises de plus de 1000 salariés d'identifier et prévenir les risques sociaux et environnementaux dans leur chaîne de valeur.",
+      "link": "https://www.village-justice.com",
+      "source": "Village de la Justice",
+      "pubDate": "14 avr. 2025"
+    },
+    {
+      "id": "a-t06-06",
+      "topicId": "t06",
+      "relevanceScore": 80,
+      "title": "Contentieux commercial : hausse des litiges post-Covid, juridictions sous tension",
+      "description": "Les tribunaux de commerce enregistrent une hausse record des litiges en 2024-2025, liée aux séquelles économiques et aux tensions sur les délais de paiement.",
+      "link": "https://www.village-justice.com",
+      "source": "Village de la Justice",
+      "pubDate": "11 avr. 2025"
+    },
+    {
+      "id": "a-t07-01",
+      "topicId": "t07",
+      "relevanceScore": 96,
+      "title": "CSRD : les premières entreprises publient leurs rapports de durabilité",
+      "description": "Les 500 premières entreprises soumises à la CSRD publient leurs rapports. Les experts notent des disparités importantes dans la qualité et la comparabilité des données.",
+      "link": "https://www.novethic.fr",
+      "source": "Novethic",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t07-02",
+      "topicId": "t07",
+      "relevanceScore": 93,
+      "title": "Finance verte : les green bonds franchissent 1 000 milliards en Europe",
+      "description": "Le marché européen des obligations vertes atteint un record historique. Les investisseurs institutionnels et les fonds de pension sont les principaux acheteurs.",
+      "link": "https://www.novethic.fr",
+      "source": "Novethic",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t07-03",
+      "topicId": "t07",
+      "relevanceScore": 90,
+      "title": "Taxe carbone aux frontières : l'Europe finalise le CBAM",
+      "description": "Le mécanisme d'ajustement carbone aux frontières européen entre dans sa phase définitive. Les importateurs d'acier, aluminium et ciment devront payer pour leurs émissions.",
+      "link": "https://ec.europa.eu",
+      "source": "Commission Européenne",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t07-04",
+      "topicId": "t07",
+      "relevanceScore": 87,
+      "title": "Biodiversité : au-delà du carbone, les nouvelles exigences des investisseurs",
+      "description": "Après le carbone, la biodiversité s'impose comme le prochain enjeu ESG. Le cadre TNFD commence à structurer les reportings des entreprises sur leurs impacts nature.",
+      "link": "https://www.novethic.fr",
+      "source": "Novethic",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t07-05",
+      "topicId": "t07",
+      "relevanceScore": 84,
+      "title": "Greenwashing : les premières sanctions tombent en France",
+      "description": "L'ARPP et la DGCCRF prononcent leurs premières sanctions significatives contre des entreprises pour publicité environnementale trompeuse.",
+      "link": "https://www.novethic.fr",
+      "source": "Novethic",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t07-06",
+      "topicId": "t07",
+      "relevanceScore": 81,
+      "title": "Objectifs SBTi : comment les entreprises françaises structurent leur trajectoire carbone",
+      "description": "Analyse des engagements SBTi des entreprises du SBF 120 : niveau d'ambition, cohérence avec les budgets carbone sectoriels et feuilles de route opérationnelles.",
+      "link": "https://www.novethic.fr",
+      "source": "Novethic",
+      "pubDate": "12 avr. 2025"
+    },
+    {
+      "id": "a-t08-01",
+      "topicId": "t08",
+      "relevanceScore": 95,
+      "title": "Supply chain IA : les algorithmes réduisent les ruptures de stock de 35%",
+      "description": "Les entreprises ayant déployé des solutions d'IA pour la planification de la demande constatent une réduction moyenne de 35% des ruptures et 20% des surstocks.",
+      "link": "https://www.supply-chain.fr",
+      "source": "Supply Chain Magazine",
+      "pubDate": "26 avr. 2025"
+    },
+    {
+      "id": "a-t08-02",
+      "topicId": "t08",
+      "relevanceScore": 92,
+      "title": "Tensions géopolitiques : les entreprises accélèrent leur nearshoring vers l'Europe",
+      "description": "Face aux risques géopolitiques et aux coûts logistiques, de nombreuses entreprises rapatrient leur production vers le Maghreb, le Portugal et la Pologne.",
+      "link": "https://www.supply-chain.fr",
+      "source": "Supply Chain Magazine",
+      "pubDate": "23 avr. 2025"
+    },
+    {
+      "id": "a-t08-03",
+      "topicId": "t08",
+      "relevanceScore": 89,
+      "title": "Transport maritime : les nouvelles routes après les tensions en mer Rouge",
+      "description": "Le détournement des navires via le Cap de Bonne Espérance entraîne un allongement des délais et une hausse des coûts. Les chargeurs adaptent leurs stratégies.",
+      "link": "https://www.voxlog.fr",
+      "source": "Voxlog",
+      "pubDate": "20 avr. 2025"
+    },
+    {
+      "id": "a-t08-04",
+      "topicId": "t08",
+      "relevanceScore": 86,
+      "title": "Entrepôts autonomes : les robots transforment la logistique de détail",
+      "description": "Les solutions robotisées goods-to-person permettent de multiplier par 3 la productivité des entrepôts tout en réduisant les erreurs de préparation.",
+      "link": "https://www.supply-chain.fr",
+      "source": "Supply Chain Magazine",
+      "pubDate": "17 avr. 2025"
+    },
+    {
+      "id": "a-t08-05",
+      "topicId": "t08",
+      "relevanceScore": 83,
+      "title": "Résilience supply chain : les enseignements de 5 ans de crises successives",
+      "description": "Covid, tensions géopolitiques, crise énergétique : les supply chain managers tirent les leçons de 5 années de turbulences pour construire des chaînes plus résilientes.",
+      "link": "https://www.supply-chain.fr",
+      "source": "Supply Chain Magazine",
+      "pubDate": "14 avr. 2025"
+    },
+    {
+      "id": "a-t08-06",
+      "topicId": "t08",
+      "relevanceScore": 80,
+      "title": "Logistique du dernier kilomètre : les villes françaises durcissent les règles d'accès",
+      "description": "Paris, Lyon et Bordeaux annoncent de nouvelles restrictions pour les véhicules de livraison. Les opérateurs s'adaptent avec des véhicules électriques et des micro-hubs.",
+      "link": "https://www.voxlog.fr",
+      "source": "Voxlog",
+      "pubDate": "11 avr. 2025"
+    },
+    {
+      "id": "a-t09-01",
+      "topicId": "t09",
+      "relevanceScore": 96,
+      "title": "Marketing IA : personnalisation à grande échelle avec les LLM",
+      "description": "Les marques leader déploient des LLM pour générer des milliers de variantes de messages personnalisés. Résultats : +40% de taux de conversion et réduction des coûts créatifs.",
+      "link": "https://www.blogdumoderateur.com",
+      "source": "BDM",
+      "pubDate": "28 avr. 2025"
+    },
+    {
+      "id": "a-t09-02",
+      "topicId": "t09",
+      "relevanceScore": 93,
+      "title": "SEO en 2025 : l'impact des résultats IA de Google sur le trafic organique",
+      "description": "Les AI Overviews de Google réduisent le trafic organique de 15 à 30% sur certaines requêtes. Les stratégies SEO doivent évoluer vers l'optimisation pour les moteurs IA.",
+      "link": "https://www.blogdumoderateur.com",
+      "source": "BDM",
+      "pubDate": "25 avr. 2025"
+    },
+    {
+      "id": "a-t09-03",
+      "topicId": "t09",
+      "relevanceScore": 90,
+      "title": "TikTok Shop : le social commerce s'impose en Europe",
+      "description": "TikTok Shop dépasse les 5 milliards d'euros de GMV en Europe. Les marques intègrent le live shopping et les UGC dans leurs stratégies d'acquisition.",
+      "link": "https://www.journalducm.com",
+      "source": "Journal du CM",
+      "pubDate": "22 avr. 2025"
+    },
+    {
+      "id": "a-t09-04",
+      "topicId": "t09",
+      "relevanceScore": 87,
+      "title": "CDP nouvelle génération : IA prédictive intégrée",
+      "description": "Les Customer Data Platforms évoluent vers des plateformes d'activation intelligentes capables de prédire le comportement client et d'orchestrer les parcours en temps réel.",
+      "link": "https://www.blogdumoderateur.com",
+      "source": "BDM",
+      "pubDate": "19 avr. 2025"
+    },
+    {
+      "id": "a-t09-05",
+      "topicId": "t09",
+      "relevanceScore": 84,
+      "title": "Influence marketing B2B : LinkedIn devient le canal prioritaire des marques tech",
+      "description": "Les entreprises tech investissent massivement sur les créateurs LinkedIn. Les campagnes d'influence B2B génèrent des leads qualifiés à un coût 3x inférieur aux formats classiques.",
+      "link": "https://www.journalducm.com",
+      "source": "Journal du CM",
+      "pubDate": "16 avr. 2025"
+    },
+    {
+      "id": "a-t09-06",
+      "topicId": "t09",
+      "relevanceScore": 81,
+      "title": "Email marketing : nouvelles règles anti-spam Google et Yahoo",
+      "description": "Les nouvelles exigences d'authentification DMARC, DKIM, SPF et de gestion des désabonnements changent les règles du jeu pour les équipes marketing.",
+      "link": "https://www.blogdumoderateur.com",
+      "source": "BDM",
+      "pubDate": "13 avr. 2025"
+    },
+    {
+      "id": "a-t10-01",
+      "topicId": "t10",
+      "relevanceScore": 95,
+      "title": "Management de demain : 5 compétences clés face à l'IA",
+      "description": "Harvard Business Review identifie les 5 compétences managériales qui résisteront à l'automatisation : pensée critique, intelligence émotionnelle, créativité, éthique et adaptabilité.",
+      "link": "https://www.hbrfrance.fr",
+      "source": "HBR France",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t10-02",
+      "topicId": "t10",
+      "relevanceScore": 92,
+      "title": "Culture d'entreprise post-pandémie : reconstruire l'appartenance à distance",
+      "description": "Les entreprises hybrides investissent dans de nouveaux rituels managériaux et des outils collaboratifs pour maintenir la cohésion d'équipe et l'engagement des collaborateurs.",
+      "link": "https://www.hbrfrance.fr",
+      "source": "HBR France",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t10-03",
+      "topicId": "t10",
+      "relevanceScore": 89,
+      "title": "OKR : pourquoi les grandes entreprises abandonnent les objectifs annuels",
+      "description": "La méthode OKR avec des cycles trimestriels s'impose. Les entreprises ayant adopté ce rythme rapportent une meilleure alignement stratégique et plus d'agilité opérationnelle.",
+      "link": "https://www.hbrfrance.fr",
+      "source": "HBR France",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t10-04",
+      "topicId": "t10",
+      "relevanceScore": 86,
+      "title": "Leadership inclusif : les pratiques qui font vraiment la différence",
+      "description": "Au-delà des déclarations, quelles pratiques managériales concrètes améliorent réellement l'inclusion ? Analyse des résultats de 200 entreprises françaises sur 3 ans.",
+      "link": "https://www.hbrfrance.fr",
+      "source": "HBR France",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t10-05",
+      "topicId": "t10",
+      "relevanceScore": 83,
+      "title": "Feedback en temps réel : les outils qui remplacent l'entretien annuel",
+      "description": "Les entreprises innovantes abandonnent l'entretien annuel au profit de boucles de feedback continues. Revue des outils et pratiques qui transforment la performance management.",
+      "link": "https://www.hbrfrance.fr",
+      "source": "HBR France",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t10-06",
+      "topicId": "t10",
+      "relevanceScore": 80,
+      "title": "Gouvernance : le CA face aux défis IA et ESG",
+      "description": "Les conseils d'administration doivent se doter de nouvelles compétences pour superviser les risques IA et les enjeux ESG. Les administrateurs techno-savants deviennent essentiels.",
+      "link": "https://www.hbrfrance.fr",
+      "source": "HBR France",
+      "pubDate": "12 avr. 2025"
+    },
+    {
+      "id": "a-t11-01",
+      "topicId": "t11",
+      "relevanceScore": 96,
+      "title": "French Tech : levées record au T1 2025, l'IA domine le palmarès",
+      "description": "Les startups françaises ont levé 3,2 milliards d'euros au T1 2025, dont 60% dans les secteurs IA, deeptech et climatech. Bpifrance confirme la dynamique.",
+      "link": "https://www.maddyness.com",
+      "source": "Maddyness",
+      "pubDate": "28 avr. 2025"
+    },
+    {
+      "id": "a-t11-02",
+      "topicId": "t11",
+      "relevanceScore": 93,
+      "title": "Station F : les startups les plus prometteuses de la promo 2025",
+      "description": "Station F présente sa sélection annuelle des 30 startups les plus prometteuses. IA médicale, fintech et greentech dominent le classement.",
+      "link": "https://www.maddyness.com",
+      "source": "Maddyness",
+      "pubDate": "25 avr. 2025"
+    },
+    {
+      "id": "a-t11-03",
+      "topicId": "t11",
+      "relevanceScore": 90,
+      "title": "Open innovation : comment les grands groupes accélèrent avec les startups",
+      "description": "Schneider Electric, TotalEnergies et Sanofi partagent leurs meilleures pratiques pour créer des partenariats startups-grands groupes réellement transformateurs.",
+      "link": "https://www.maddyness.com",
+      "source": "Maddyness",
+      "pubDate": "22 avr. 2025"
+    },
+    {
+      "id": "a-t11-04",
+      "topicId": "t11",
+      "relevanceScore": 87,
+      "title": "Deeptech : la France investit 500 millions dans les technologies de rupture",
+      "description": "Le gouvernement annonce un plan deeptech de 500M€ ciblant les technologies quantiques, la fusion nucléaire, la biotech et l'IA de nouvelle génération.",
+      "link": "https://www.maddyness.com",
+      "source": "Maddyness",
+      "pubDate": "19 avr. 2025"
+    },
+    {
+      "id": "a-t11-05",
+      "topicId": "t11",
+      "relevanceScore": 84,
+      "title": "Licornes françaises 2025 : les nouveaux entrants au club select",
+      "description": "Deux nouvelles startups françaises ont franchi le cap du milliard de valorisation ce trimestre. Portrait des nouvelles licornes et de leurs modèles de croissance.",
+      "link": "https://www.maddyness.com",
+      "source": "Maddyness",
+      "pubDate": "16 avr. 2025"
+    },
+    {
+      "id": "a-t11-06",
+      "topicId": "t11",
+      "relevanceScore": 81,
+      "title": "Climatech : l'Europe, premier marché mondial pour les startups de la transition",
+      "description": "L'Europe concentre 35% des investissements mondiaux dans les startups climatech. Hydrogène, stockage d'énergie et efficacité industrielle attirent les capitaux.",
+      "link": "https://www.maddyness.com",
+      "source": "Maddyness",
+      "pubDate": "13 avr. 2025"
+    },
+    {
+      "id": "a-t12-01",
+      "topicId": "t12",
+      "relevanceScore": 95,
+      "title": "Immobilier résidentiel : stabilisation des prix en Île-de-France",
+      "description": "Après 18 mois de baisse, les prix de l'immobilier parisien semblent se stabiliser autour de 9 800€/m². Les grandes métropoles régionales affichent un léger rebond.",
+      "link": "https://www.businessimmo.com",
+      "source": "Business Immo",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t12-02",
+      "topicId": "t12",
+      "relevanceScore": 92,
+      "title": "Bureaux : le flex office s'impose, la vacance reste élevée hors QCA parisien",
+      "description": "Le marché des bureaux se bifurque nettement entre les actifs prime des QCA très recherchés et les bureaux périphériques qui peinent à se louer.",
+      "link": "https://www.businessimmo.com",
+      "source": "Business Immo",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t12-03",
+      "topicId": "t12",
+      "relevanceScore": 89,
+      "title": "Taux immobiliers : retour sous les 3,5%, le marché redémarre",
+      "description": "Les banques assouplissent leurs conditions de prêt. Les taux sur 20 ans reviennent sous les 3,5% pour les meilleurs profils, ravivant la demande des acheteurs.",
+      "link": "https://www.businessimmo.com",
+      "source": "Business Immo",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t12-04",
+      "topicId": "t12",
+      "relevanceScore": 86,
+      "title": "Logistique urbaine : les entrepôts du dernier kilomètre s'arrachent à prix d'or",
+      "description": "La demande d'entrepôts urbains explose avec le développement du quick commerce. Les loyers prime pour la logistique urbaine atteignent des niveaux records.",
+      "link": "https://www.businessimmo.com",
+      "source": "Business Immo",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t12-05",
+      "topicId": "t12",
+      "relevanceScore": 83,
+      "title": "DPE : les obligations accélèrent les arbitrages des propriétaires",
+      "description": "Les logements classés F et G ne peuvent plus être loués depuis janvier 2025. Les propriétaires face au choix entre rénovation coûteuse ou vente à prix décoté.",
+      "link": "https://www.businessimmo.com",
+      "source": "Business Immo",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t12-06",
+      "topicId": "t12",
+      "relevanceScore": 80,
+      "title": "Data centers : la France attire les investissements, la consommation énergétique questionne",
+      "description": "Les géants du cloud multiplient les projets de data centers en France. La question de leur consommation électrique et hydrique suscite des débats croissants.",
+      "link": "https://www.businessimmo.com",
+      "source": "Business Immo",
+      "pubDate": "12 avr. 2025"
+    },
+    {
+      "id": "a-t13-01",
+      "topicId": "t13",
+      "relevanceScore": 96,
+      "title": "IA diagnostique : les algorithmes rivalisent avec les radiologues",
+      "description": "Une étude publiée dans The Lancet montre que les algorithmes d'IA atteignent une sensibilité de 94% pour la détection du cancer du sein, contre 91% pour les médecins.",
+      "link": "https://www.thelancet.com",
+      "source": "The Lancet",
+      "pubDate": "28 avr. 2025"
+    },
+    {
+      "id": "a-t13-02",
+      "topicId": "t13",
+      "relevanceScore": 93,
+      "title": "Téléconsultation : 3 millions de consultations mensuelles en France",
+      "description": "La téléconsultation s'installe durablement dans les pratiques françaises. Le modèle hybride présentiel/distanciel s'impose notamment pour le suivi des maladies chroniques.",
+      "link": "https://www.whatsupdoc-lemag.fr",
+      "source": "What's Up Doc",
+      "pubDate": "25 avr. 2025"
+    },
+    {
+      "id": "a-t13-03",
+      "topicId": "t13",
+      "relevanceScore": 90,
+      "title": "Sanofi rachète une startup de thérapie génique pour 2 milliards",
+      "description": "Sanofi finalise l'acquisition d'une biotech spécialisée en thérapies géniques pour maladies rares, renforçant son pipeline et sa position dans la médecine de précision.",
+      "link": "https://www.whatsupdoc-lemag.fr",
+      "source": "What's Up Doc",
+      "pubDate": "22 avr. 2025"
+    },
+    {
+      "id": "a-t13-04",
+      "topicId": "t13",
+      "relevanceScore": 87,
+      "title": "DMP : 60 millions de Français couverts, mais l'usage reste limité",
+      "description": "Le Dossier Médical Partagé atteint une couverture quasi-universelle mais son utilisation effective par les professionnels de santé reste insuffisante.",
+      "link": "https://www.whatsupdoc-lemag.fr",
+      "source": "What's Up Doc",
+      "pubDate": "19 avr. 2025"
+    },
+    {
+      "id": "a-t13-05",
+      "topicId": "t13",
+      "relevanceScore": 84,
+      "title": "Wearables médicaux : la montre connectée validée pour la surveillance cardiaque",
+      "description": "La HAS valide plusieurs dispositifs wearables pour la surveillance des arythmies cardiaques. Les montres connectées entrent officiellement dans le parcours de soins français.",
+      "link": "https://www.whatsupdoc-lemag.fr",
+      "source": "What's Up Doc",
+      "pubDate": "16 avr. 2025"
+    },
+    {
+      "id": "a-t13-06",
+      "topicId": "t13",
+      "relevanceScore": 81,
+      "title": "Déserts médicaux : les solutions innovantes testées dans les territoires ruraux",
+      "description": "Maisons de santé pluridisciplinaires, médecins salariés et consultations avancées : tour d'horizon des solutions déployées pour lutter contre les déserts médicaux.",
+      "link": "https://www.whatsupdoc-lemag.fr",
+      "source": "What's Up Doc",
+      "pubDate": "13 avr. 2025"
+    },
+    {
+      "id": "a-t14-01",
+      "topicId": "t14",
+      "relevanceScore": 97,
+      "title": "Solaire en France : nouveau record, 25 GW installés franchis",
+      "description": "La France dépasse le cap des 25 GW de capacité solaire installée. L'objectif de 100 GW en 2050 semble atteignable mais le rythme d'installation doit encore s'accélérer.",
+      "link": "https://www.revolution-energetique.com",
+      "source": "Révolution Energétique",
+      "pubDate": "28 avr. 2025"
+    },
+    {
+      "id": "a-t14-02",
+      "topicId": "t14",
+      "relevanceScore": 94,
+      "title": "EDF annonce le calendrier des 6 nouveaux EPR2",
+      "description": "EDF dévoile un calendrier précis pour la construction des 6 nouveaux réacteurs EPR2. Premier béton en 2027, mise en service du premier réacteur prévue pour 2037.",
+      "link": "https://www.connaissancedesenergies.org",
+      "source": "Connaissance des Énergies",
+      "pubDate": "25 avr. 2025"
+    },
+    {
+      "id": "a-t14-03",
+      "topicId": "t14",
+      "relevanceScore": 91,
+      "title": "Hydrogène vert : les premières unités industrielles françaises en production",
+      "description": "Les premiers électrolyseurs de grande taille entrent en production en France, marquant le début d'une filière hydrogène vert industrielle. Les coûts restent un défi.",
+      "link": "https://www.revolution-energetique.com",
+      "source": "Révolution Energétique",
+      "pubDate": "22 avr. 2025"
+    },
+    {
+      "id": "a-t14-04",
+      "topicId": "t14",
+      "relevanceScore": 88,
+      "title": "Prix de l'électricité : la nouvelle formule ARENH avantage les industriels",
+      "description": "La réforme du marché de l'électricité entre en vigueur. Les industriels français bénéficient d'un accès privilégié à l'électricité nucléaire à prix régulé.",
+      "link": "https://www.connaissancedesenergies.org",
+      "source": "Connaissance des Énergies",
+      "pubDate": "19 avr. 2025"
+    },
+    {
+      "id": "a-t14-05",
+      "topicId": "t14",
+      "relevanceScore": 85,
+      "title": "Éolien offshore Saint-Nazaire : performances au-dessus des prévisions",
+      "description": "Un an après sa mise en service, le parc éolien offshore de Saint-Nazaire produit 15% d'électricité de plus que prévu, rassurant sur le potentiel de l'éolien en mer.",
+      "link": "https://www.revolution-energetique.com",
+      "source": "Révolution Energétique",
+      "pubDate": "16 avr. 2025"
+    },
+    {
+      "id": "a-t14-06",
+      "topicId": "t14",
+      "relevanceScore": 82,
+      "title": "MaPrimeRénov' réformée : ce qui change pour les propriétaires",
+      "description": "Le gouvernement réforme MaPrimeRénov' pour concentrer les aides sur les rénovations globales. Les travaux ponctuels ne seront plus éligibles dès 2026.",
+      "link": "https://www.connaissancedesenergies.org",
+      "source": "Connaissance des Énergies",
+      "pubDate": "13 avr. 2025"
+    },
+    {
+      "id": "a-t15-01",
+      "topicId": "t15",
+      "relevanceScore": 96,
+      "title": "AI Act : le guide pratique de conformité pour les entreprises françaises",
+      "description": "La CNIL publie un guide pratique pour aider les entreprises à évaluer le niveau de risque de leurs systèmes IA et mettre en place les mesures de conformité requises.",
+      "link": "https://www.cnil.fr",
+      "source": "CNIL",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t15-02",
+      "topicId": "t15",
+      "relevanceScore": 93,
+      "title": "RGPD : amende record de 50 millions contre un acteur du retail",
+      "description": "La CNIL inflige sa plus lourde amende à un groupe de distribution pour des manquements graves en matière de collecte de données sans consentement.",
+      "link": "https://www.cnil.fr",
+      "source": "CNIL",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t15-03",
+      "topicId": "t15",
+      "relevanceScore": 90,
+      "title": "DORA : checklist de conformité pour les établissements financiers",
+      "description": "Le règlement DORA est applicable depuis janvier 2025. Les établissements financiers doivent démontrer leur résilience opérationnelle numérique. Checklist des obligations clés.",
+      "link": "https://www.dpo-partage.fr",
+      "source": "DPO Partage",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t15-04",
+      "topicId": "t15",
+      "relevanceScore": 87,
+      "title": "Données personnelles des salariés : nouvelles obligations des employeurs",
+      "description": "La CNIL met à jour ses recommandations sur la gestion des données des salariés. Surveillance informatique, géolocalisation et biométrie font l'objet de nouvelles lignes directrices.",
+      "link": "https://www.cnil.fr",
+      "source": "CNIL",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t15-05",
+      "topicId": "t15",
+      "relevanceScore": 84,
+      "title": "DMA et DSA : premières mesures d'exécution contre les gatekeepers",
+      "description": "La Commission Européenne engage ses premières procédures formelles au titre du DMA contre plusieurs grandes plateformes. Les amendes atteignent 10% du CA mondial.",
+      "link": "https://ec.europa.eu",
+      "source": "Commission Européenne",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t15-06",
+      "topicId": "t15",
+      "relevanceScore": 81,
+      "title": "Assurance cyber : les assureurs durcissent leurs conditions face à la sinistralité",
+      "description": "Les compagnies d'assurance cyber durcissent leurs critères de souscription. Les entreprises doivent démontrer un niveau minimal de maturité sécurité pour être couvertes.",
+      "link": "https://www.dpo-partage.fr",
+      "source": "DPO Partage",
+      "pubDate": "12 avr. 2025"
+    },
+    {
+      "id": "a-t16-01",
+      "topicId": "t16",
+      "relevanceScore": 95,
+      "title": "DataOps en 2025 : les pratiques qui accélèrent le time-to-insight",
+      "description": "L'adoption des pratiques DataOps permet de diviser par 3 le temps de mise en production des pipelines data. Retour d'expérience des équipes les plus matures.",
+      "link": "https://www.lebigdata.fr",
+      "source": "Le Big Data",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t16-02",
+      "topicId": "t16",
+      "relevanceScore": 92,
+      "title": "Lakehouse : l'architecture unifiée qui réconcilie data warehouse et data lake",
+      "description": "L'architecture Lakehouse s'impose comme le nouveau standard. Databricks, Snowflake et dbt structurent l'écosystème autour de ce paradigme unifié.",
+      "link": "https://www.lebigdata.fr",
+      "source": "Le Big Data",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t16-03",
+      "topicId": "t16",
+      "relevanceScore": 89,
+      "title": "Data governance : pourquoi les data catalog deviennent indispensables",
+      "description": "Avec la multiplication des sources de données, les data catalogs permettent de tracer la lignée des données, d'assurer leur qualité et de faciliter leur découverte par les métiers.",
+      "link": "https://www.actuia.com",
+      "source": "Actu IA",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t16-04",
+      "topicId": "t16",
+      "relevanceScore": 86,
+      "title": "Power BI vs Tableau vs Looker : le comparatif 2025 des outils de BI",
+      "description": "Analyse comparative des trois leaders du marché BI : fonctionnalités IA, connecteurs, performance et TCO. Quel outil pour quel contexte ?",
+      "link": "https://www.lebigdata.fr",
+      "source": "Le Big Data",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t16-05",
+      "topicId": "t16",
+      "relevanceScore": 83,
+      "title": "RAG et bases vectorielles : l'IA générative au service de la connaissance d'entreprise",
+      "description": "Les architectures RAG permettent de connecter les LLM aux bases de données propriétaires. Guide d'implémentation pour les équipes data.",
+      "link": "https://www.actuia.com",
+      "source": "Actu IA",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t16-06",
+      "topicId": "t16",
+      "relevanceScore": 80,
+      "title": "Chief Data Officer : le rôle évolue vers la gouvernance de l'IA",
+      "description": "La fonction CDO se transforme. Les entreprises attendent de leurs CDO qu'ils pilotent simultanément la stratégie data, la gouvernance IA et la conformité réglementaire.",
+      "link": "https://www.lebigdata.fr",
+      "source": "Le Big Data",
+      "pubDate": "12 avr. 2025"
+    },
+    {
+      "id": "a-t17-01",
+      "topicId": "t17",
+      "relevanceScore": 95,
+      "title": "E-commerce France : +12% au T1 2025, le mobile dépasse le desktop",
+      "description": "La Fevad publie ses chiffres du T1 2025 : le e-commerce français progresse de 12% avec 45 milliards d'euros de transactions. Le mobile dépasse le desktop pour la première fois.",
+      "link": "https://www.ecommercemag.fr",
+      "source": "E-Commerce Mag",
+      "pubDate": "28 avr. 2025"
+    },
+    {
+      "id": "a-t17-02",
+      "topicId": "t17",
+      "relevanceScore": 92,
+      "title": "Quick commerce : le secteur se consolide autour de 2 acteurs",
+      "description": "Après une période d'euphorie et de brûlage de cash, le quick commerce européen se consolide. Analyse du modèle économique des survivants.",
+      "link": "https://www.ecommercemag.fr",
+      "source": "E-Commerce Mag",
+      "pubDate": "25 avr. 2025"
+    },
+    {
+      "id": "a-t17-03",
+      "topicId": "t17",
+      "relevanceScore": 89,
+      "title": "Amazon vs marketplaces françaises : la bataille pour les vendeurs tiers",
+      "description": "Cdiscount, Fnac-Darty et ManoMano intensifient leurs offres aux vendeurs tiers pour contrer Amazon. Commission, logistique et visibilité sont les terrains de la compétition.",
+      "link": "https://www.ecommercemag.fr",
+      "source": "E-Commerce Mag",
+      "pubDate": "22 avr. 2025"
+    },
+    {
+      "id": "a-t17-04",
+      "topicId": "t17",
+      "relevanceScore": 86,
+      "title": "Recommandations IA : +25% de panier moyen et +18% de conversion",
+      "description": "Les moteurs de recommandation intégrant des LLM permettent une personnalisation contextuelle qui augmente significativement les métriques e-commerce clés.",
+      "link": "https://www.journaldunet.com",
+      "source": "Journal du Net",
+      "pubDate": "19 avr. 2025"
+    },
+    {
+      "id": "a-t17-05",
+      "topicId": "t17",
+      "relevanceScore": 83,
+      "title": "Retail media : les enseignes françaises monétisent leur audience digitale",
+      "description": "Le retail media représente désormais 15% des budgets publicitaires digitaux en France. Carrefour, Leclerc et Intermarché structurent des offres de plus en plus sophistiquées.",
+      "link": "https://www.ecommercemag.fr",
+      "source": "E-Commerce Mag",
+      "pubDate": "16 avr. 2025"
+    },
+    {
+      "id": "a-t17-06",
+      "topicId": "t17",
+      "relevanceScore": 80,
+      "title": "Logistique retour : le coût caché que les marques sous-estiment",
+      "description": "Les retours représentent en moyenne 20% des commandes et grèvent les marges. Les meilleures pratiques pour réduire les retours et optimiser leur traitement.",
+      "link": "https://www.journaldunet.com",
+      "source": "Journal du Net",
+      "pubDate": "13 avr. 2025"
+    },
+    {
+      "id": "a-t18-01",
+      "topicId": "t18",
+      "relevanceScore": 96,
+      "title": "Tensions commerciales USA-Europe : impacts des nouvelles barrières douanières",
+      "description": "Analyse des dernières mesures protectionnistes américaines et de leurs répercussions sur les exportateurs européens dans l'automobile, l'aéronautique et l'agroalimentaire.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "28 avr. 2025"
+    },
+    {
+      "id": "a-t18-02",
+      "topicId": "t18",
+      "relevanceScore": 93,
+      "title": "Ukraine : impacts économiques 3 ans après, l'Europe restructure ses dépendances",
+      "description": "Analyse des reconfigurations économiques induites par le conflit : souveraineté énergétique, défense, supply chain et relations avec la Russie.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "25 avr. 2025"
+    },
+    {
+      "id": "a-t18-03",
+      "topicId": "t18",
+      "relevanceScore": 90,
+      "title": "Chine : ralentissement à 4,2%, les entreprises européennes diversifient",
+      "description": "La croissance chinoise ralentit. Les entreprises européennes diversifient leurs investissements vers le Vietnam, l'Inde et le Mexique pour réduire leur dépendance.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "22 avr. 2025"
+    },
+    {
+      "id": "a-t18-04",
+      "topicId": "t18",
+      "relevanceScore": 87,
+      "title": "Industrie de défense française : montée en puissance face aux nouvelles menaces",
+      "description": "La France accélère ses investissements dans l'industrie de défense. Le budget des armées augmente de 40% sur 5 ans, portant une filière industrielle de 200 000 emplois.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "19 avr. 2025"
+    },
+    {
+      "id": "a-t18-05",
+      "topicId": "t18",
+      "relevanceScore": 84,
+      "title": "Souveraineté numérique européenne : le Digital Decade à mi-parcours",
+      "description": "À mi-parcours du programme Europe Digitale 2030, l'UE fait le point sur ses objectifs de souveraineté numérique. Les progrès sont inégaux selon les axes prioritaires.",
+      "link": "https://www.lesechos.fr",
+      "source": "Les Echos",
+      "pubDate": "16 avr. 2025"
+    },
+    {
+      "id": "a-t18-06",
+      "topicId": "t18",
+      "relevanceScore": 81,
+      "title": "FMI : prévisions 2025, l'Europe face au risque de décrochage",
+      "description": "Le FMI révise à la baisse ses prévisions pour la zone euro à 1,3% en 2025. La faible croissance de l'Allemagne et les incertitudes commerciales pèsent sur les perspectives.",
+      "link": "https://www.imf.org",
+      "source": "FMI",
+      "pubDate": "13 avr. 2025"
+    },
+    {
+      "id": "a-t19-01",
+      "topicId": "t19",
+      "relevanceScore": 94,
+      "title": "UX Research 2025 : les méthodes hybrides IA-humain transforment la compréhension utilisateur",
+      "description": "L'intégration de l'IA dans les processus de recherche utilisateur permet d'analyser des volumes massifs de retours, tout en préservant la valeur des nuances qualitatives.",
+      "link": "https://uxdesign.cc",
+      "source": "UX Collective",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t19-02",
+      "topicId": "t19",
+      "relevanceScore": 91,
+      "title": "Design system à l'échelle : gouvernance, contribution et adoption",
+      "description": "Retour d'expérience de 5 grandes organisations françaises sur la mise en place et la maintenance de design systems : les succès et les défis rencontrés.",
+      "link": "https://uxdesign.cc",
+      "source": "UX Collective",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t19-03",
+      "topicId": "t19",
+      "relevanceScore": 88,
+      "title": "Service design dans le secteur public : meilleures initiatives 2024-2025",
+      "description": "Les administrations françaises adoptent les méthodes du service design pour repenser leurs services. Panorama des initiatives les plus réussies et des enseignements tirés.",
+      "link": "https://www.usabilis.com",
+      "source": "Usabilis",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t19-04",
+      "topicId": "t19",
+      "relevanceScore": 85,
+      "title": "Accessibilité numérique : le RGAA s'impose, les entreprises accélèrent",
+      "description": "La loi impose désormais l'accessibilité numérique à un nombre croissant d'organisations. Les audits RGAA révèlent des taux de conformité encore insuffisants.",
+      "link": "https://www.usabilis.com",
+      "source": "Usabilis",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t19-05",
+      "topicId": "t19",
+      "relevanceScore": 82,
+      "title": "Figma IA : nouvelles fonctionnalités qui transforment le workflow des designers",
+      "description": "Figma intègre des fonctionnalités IA avancées : génération de composants, prototypage automatique et suggestions de design. Comment les équipes s'adaptent.",
+      "link": "https://uxdesign.cc",
+      "source": "UX Collective",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t19-06",
+      "topicId": "t19",
+      "relevanceScore": 79,
+      "title": "Jobs to be done : retour en force d'un framework qui dépasse le design",
+      "description": "Le framework Jobs to be Done s'impose au-delà du design UX pour guider les décisions stratégiques et d'innovation produit. Comment l'appliquer concrètement en entreprise.",
+      "link": "https://www.usabilis.com",
+      "source": "Usabilis",
+      "pubDate": "12 avr. 2025"
+    },
+    {
+      "id": "a-t20-01",
+      "topicId": "t20",
+      "relevanceScore": 95,
+      "title": "Industrie 4.0 : l'usine connectée française rattrape son retard sur l'Allemagne",
+      "description": "Une étude PwC montre que les industriels français accélèrent leurs investissements dans les jumeaux numériques, l'IA et la robotique, réduisant l'écart avec l'Allemagne.",
+      "link": "https://www.usinenouvelle.com",
+      "source": "L'Usine Nouvelle",
+      "pubDate": "27 avr. 2025"
+    },
+    {
+      "id": "a-t20-02",
+      "topicId": "t20",
+      "relevanceScore": 92,
+      "title": "Cobots : les robots collaboratifs transforment les chaînes d'assemblage",
+      "description": "Les robots collaboratifs se démocratisent dans les PME industrielles françaises. Gains de productivité, sécurité et acceptation par les opérateurs au bilan.",
+      "link": "https://www.usinenouvelle.com",
+      "source": "L'Usine Nouvelle",
+      "pubDate": "24 avr. 2025"
+    },
+    {
+      "id": "a-t20-03",
+      "topicId": "t20",
+      "relevanceScore": 89,
+      "title": "Lean manufacturing à l'ère de l'IA : Toyota rencontre le machine learning",
+      "description": "Comment les entreprises combinent les principes du lean manufacturing avec les outils IA pour éliminer les gaspillages et améliorer la qualité en temps réel.",
+      "link": "https://www.industrie-mag.com",
+      "source": "Industrie Mag",
+      "pubDate": "21 avr. 2025"
+    },
+    {
+      "id": "a-t20-04",
+      "topicId": "t20",
+      "relevanceScore": 86,
+      "title": "Maintenance prédictive : ROI moyen de 3,2 ans, -40% de pannes",
+      "description": "Analyse de 30 projets de maintenance prédictive dans l'industrie française. Les conditions du succès et les écueils à éviter pour maximiser le retour sur investissement.",
+      "link": "https://www.usinenouvelle.com",
+      "source": "L'Usine Nouvelle",
+      "pubDate": "18 avr. 2025"
+    },
+    {
+      "id": "a-t20-05",
+      "topicId": "t20",
+      "relevanceScore": 83,
+      "title": "Décarbonation industrielle : solutions disponibles et leur maturité",
+      "description": "Tour d'horizon des technologies disponibles pour décarboner les procédés industriels : électrification, hydrogène, captage de CO2. Maturité et coûts par secteur.",
+      "link": "https://www.usinenouvelle.com",
+      "source": "L'Usine Nouvelle",
+      "pubDate": "15 avr. 2025"
+    },
+    {
+      "id": "a-t20-06",
+      "topicId": "t20",
+      "relevanceScore": 80,
+      "title": "Pénurie de main-d'œuvre industrielle : solutions pour attirer les talents",
+      "description": "L'industrie française manque de 100 000 ouvriers qualifiés. Les entreprises multiplient les initiatives : revalorisation salariale, alternance, nouvelle image de marque.",
+      "link": "https://www.industrie-mag.com",
+      "source": "Industrie Mag",
+      "pubDate": "12 avr. 2025"
+    }
+  ],
+  "customWatches": [],
+  "alerts": [],
+  "lastUpdated": "2025-04-28T00:00:00.000Z",
+  "$schema": "./node_modules/json-server/schema.json"
+}
