@@ -35,6 +35,8 @@ export default function Register() {
         role: 'user',
         subscriptions: [],
         favorites: [],
+        emailAlerts: false,
+        seenArticleKeys: [],
         createdAt: new Date().toISOString()
       }
       const create = await fetch(`${API}/users`, {

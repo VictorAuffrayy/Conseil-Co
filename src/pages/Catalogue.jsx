@@ -16,6 +16,14 @@ const CATEGORY_COLORS = {
   'Secteur':    { bg: '#F0FDFA', text: '#134E4A', border: '#99F6E4' },
 }
 
+// Clé unique fiable pour identifier un article, en évitant les collisions
+// sur '#' (lien manquant) ou des IDs accidentellement identiques.
+function getArticleKey(article) {
+  if (article.link && article.link !== '#') return article.link
+  if (article.id) return article.id
+  return `${article.title || ''}__${article.source || ''}`
+}
+
 // --- MODAL ARTICLE ---
 function ArticleModal({ article, topic, onClose, isFav, onToggleFav }) {
   useEffect(() => {
@@ -471,10 +479,10 @@ export default function Catalogue() {
   }
 
   const toggleFavorite = async (article) => {
-    const artKey = article.id || article.link
-    const isFav = favorites.some(f => (f.id || f.link) === artKey)
+    const artKey = getArticleKey(article)
+    const isFav = favorites.some(f => getArticleKey(f) === artKey)
     const next = isFav
-      ? favorites.filter(f => (f.id || f.link) !== artKey)
+      ? favorites.filter(f => getArticleKey(f) !== artKey)
       : [...favorites, { ...article, savedAt: new Date().toISOString() }]
     setFavorites(next)
     showToast(isFav ? '✓ Retiré des favoris' : '★ Ajouté aux favoris !')
@@ -484,15 +492,14 @@ export default function Catalogue() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ favorites: next })
       })
-      login({ ...user, favorites: next })
     } catch {
       setFavorites(favorites)
     }
   }
 
   const isFavorite = (article) => {
-    const artKey = article.id || article.link
-    return favorites.some(f => (f.id || f.link) === artKey)
+    const artKey = getArticleKey(article)
+    return favorites.some(f => getArticleKey(f) === artKey)
   }
 
   const toggleSubscription = async (topicId, e) => {

@@ -1,6 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 
+
 export default function Navbar() {
   const { user, logout } = useAuth()
   const location = useLocation()
@@ -40,6 +41,17 @@ export default function Navbar() {
 
         <div className="navbar-user">
           <span className="navbar-username">{user?.name?.split(' ')[0]}</span>
+          <Link
+            to="/parametres"
+            className={`navbar-icon-link${location.pathname === '/parametres' ? ' active' : ''}`}
+            title="Paramètres"
+            aria-label="Paramètres"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+          </Link>
           <button className="navbar-logout" onClick={handleLogout}>Déconnexion</button>
         </div>
       </div>
@@ -57,6 +69,9 @@ export default function Navbar() {
         .navbar-link.active { color: var(--color-accent); background: var(--color-accent-muted); font-weight: 600; }
         .navbar-user { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
         .navbar-username { font-size: 0.88rem; font-weight: 500; color: var(--color-text); }
+        .navbar-icon-link { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; color: var(--color-text-muted); text-decoration: none; transition: color 0.15s, background 0.15s; }
+        .navbar-icon-link:hover { color: var(--color-text); background: var(--color-accent-muted); }
+        .navbar-icon-link.active { color: var(--color-accent); background: var(--color-accent-muted); }
         .navbar-logout { background: none; border: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.82rem; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-family: var(--font-body); transition: border-color 0.15s, color 0.15s; }
         .navbar-logout:hover { border-color: var(--color-accent); color: var(--color-accent); }
       `}</style>

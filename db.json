@@ -8,7 +8,9 @@
       "role": "admin",
       "subscriptions": [],
       "favorites": [],
-      "createdAt": "2024-01-01T00:00:00.000Z"
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "emailAlerts": false,
+      "seenArticleKeys": []
     },
     {
       "id": "TK1f0u4l12E",
@@ -16,26 +18,38 @@
       "email": "victor.auffrayy@gmail.com",
       "password": "Stylo92500",
       "role": "user",
-      "subscriptions": [],
-      "favorites": [
-        {
-          "title": "Anthropic supplie Donald Trump de réguler l’IA (la raison va vous terrifier)",
-          "link": "https://www.lebigdata.fr/anthropic-supplie-donald-trump-de-reguler-lia-la-raison-va-vous-terrifier",
-          "description": "L&#8217;intelligence artificielle (IA) progresse à une vitesse fulgurante. Certains modèles plus que d’autres… Or, la réglementation n’arrive pas à suivre. &#8230;\nCet article Anthropic supplie Donald Trump de réguler l&rsquo;IA (la raison va vous terrifier)  a été publié sur LEBIGDATA.FR.",
-          "fullDescription": "L&#8217;intelligence artificielle (IA) progresse à une vitesse fulgurante. Certains modèles plus que d’autres… Or, la réglementation n’arrive pas à suivre. &#8230;\nCet article Anthropic supplie Donald Trump de réguler l&rsquo;IA (la raison va vous terrifier)  a été publié sur LEBIGDATA.FR.",
-          "pubDate": "2026-06-11T04:34:12.000Z",
-          "pubDateFormatted": "jeudi 11 juin 2026",
-          "pubTimeFormatted": "06:34",
-          "source": "Le Big Data",
-          "category": "Intelligence artificielle",
-          "author": "",
-          "relevanceScore": 95,
-          "id": "t01-aHR0cHMlM0ElMkYl",
-          "topicId": "t01",
-          "savedAt": "2026-06-11T20:08:17.822Z"
-        }
+      "subscriptions": [
+        "t01"
       ],
-      "createdAt": "2026-05-19T13:22:28.631Z"
+      "favorites": [],
+      "createdAt": "2026-05-19T13:22:28.631Z",
+      "emailAlerts": true,
+      "seenArticleKeys": [
+        "https://www.actuia.com/actualite/anthropic-contraint-de-suspendre-fable-5-et-mythos-5-apres-une-directive-du-gouvernement-americain/",
+        "https://www.lemonde.fr/pixels/article/2026/06/13/anthropic-desactive-brutalement-ses-deux-modeles-d-ia-les-plus-puissants-faute-de-pouvoir-se-conformer-aux-ordres-de-l-administration-trump_6701235_4408996.html",
+        "https://www.actuia.com/actualite/jpmorgan-et-goldman-sachs-entrent-dans-une-levee-ia-pre-revenue-a-41-md/",
+        "https://www.lebigdata.fr/les-meilleurs-sites-pour-telecharger-legalement-des-roms",
+        "https://www.lebigdata.fr/siri-ai-vs-google-gemini-qui-gagne-en-2026",
+        "https://www.lebigdata.fr/gemini-peut-maintenant-regler-limage-sur-google-tv-mais-il-y-a-un-hic",
+        "https://www.actuia.com/actualite/aides-par-gpt-5-puis-livres-a-eux-memes-un-essai-randomise-mesure-le-cout-dapprentissage-de-lassistance-ia/",
+        "https://www.actuia.com/actualite/ovhcloud-gladia-la-brique-vocale-qui-manquait-au-cloud-souverain/",
+        "https://www.lebigdata.fr/playstation-plus-extra-et-premium-les-hits-du-mois-a-tester-absolument",
+        "https://www.lebigdata.fr/que-se-passe-t-il-sur-facebook-et-instagram-un-bug-massif-est-en-cours",
+        "https://www.actuia.com/actualite/siri-ai-gemini-comme-professeur-pas-comme-moteur-ce-que-la-wwdc-na-pas-dit/",
+        "https://www.actuia.com/actualite/s-1-confidentiels-openai-emboite-le-pas-a-anthropic-et-la-sec-obtiendra-ce-que-les-valorisations-privees-cachaient/",
+        "https://www.actuia.com/actualite/a-lille-lia-avec-nous-teste-la-promesse-dune-vallee-europeenne-de-lia-appliquee/",
+        "https://www.lebigdata.fr/cet-ingenieur-voulait-rendre-grok-plus-sure-elon-musk-la-vire",
+        "https://www.lebigdata.fr/codex-openai-vous-laisse-desormais-choisir-quand-reinitialiser-votre-quota",
+        "https://www.lebigdata.fr/spacex-valorise-son-introduction-en-bourse-a-135-dollars-par-action-un-record-mondial",
+        "https://www.lebigdata.fr/votre-emploi-tient-il-face-a-lia-cette-etude-danthropic-devrait-vous-inquieter",
+        "https://www.lemonde.fr/economie/article/2026/06/12/ia-comment-le-deploiement-des-centres-de-donnees-cree-un-choc-des-ressources_6701101_3234.html",
+        "https://www.lebigdata.fr/la-startup-de-jeff-bezos-leve-12-milliards-de-dollars-pour-developper-son-ia-dingenierie",
+        "https://www.lemonde.fr/economie/article/2026/06/12/les-banques-rationnent-l-usage-de-l-ia-terrifiees-par-les-couts-qu-elle-engendre_6701070_3234.html",
+        "https://www.actuia.com/actualite/fable-5-et-mythos-5-anthropic-facture-la-configuration-overlay-pas-les-poids/",
+        "https://www.actuia.com/actualite/solaria-3-gladia-en-tete-sur-laudio-de-production-selon-ses-propres-mesures/",
+        "https://www.actuia.com/actualite/actuia-vous-invite-au-vivatech-festival-50-entrees-a-gagner-pour-la-journee-grand-public-du-20-juin/",
+        "https://www.lemonde.fr/economie/article/2026/06/11/cybersecurite-orange-et-credit-agricole-en-discussions-pour-avoir-acces-a-mythos-le-modele-d-ia-d-anthropic_6700795_3234.html"
+      ]
     }
   ],
   "topics": [

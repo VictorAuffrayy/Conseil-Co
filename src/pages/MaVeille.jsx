@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useAuth } from '../AuthContext'
 import Navbar from '../components/Navbar'
+import { matchCategories, suggestKeywords, suggestSources } from '../services/sourceLibrary'
 
 const API = 'http://localhost:3001'
 const CORS_PROXY = 'https://corsproxy.io/?'
@@ -53,6 +54,14 @@ function scoreArticle(article, keywords) {
     else if (ageH < 24) score += 5
   }
   return Math.min(score, 99)
+}
+
+// Clé unique fiable pour identifier un article, en évitant les collisions
+// sur '#' (lien manquant) ou des IDs accidentellement identiques.
+function getArticleKey(article) {
+  if (article.link && article.link !== '#') return article.link
+  if (article.id) return article.id
+  return `${article.title || ''}__${article.source || ''}`
 }
 
 // ─── COMPOSANTS UI ────────────────────────────────────────────────────────────
@@ -129,81 +138,64 @@ function ArticleModal({ article, watchColor, onClose, isFav, onToggleFav }) {
 const WATCH_COLORS = ['#1A3A2A', '#2D6A4F', '#1E40AF', '#7C3AED', '#B45309', '#DC2626', '#0369A1', '#065F46']
 
 function CreateWatchWizard({ onCancel, onCreate }) {
-  const [step, setStep] = useState(1) // 1=form 2=generating 3=preview
+  const [step, setStep] = useState(1) // 1=questionnaire 2=preview
   const [form, setForm] = useState({
     name: '',
     description: '',
     keywords: '',
-    language: 'fr',
     color: WATCH_COLORS[0],
   })
-  const [generated, setGenerated] = useState(null) // { sources, keywords }
   const [error, setError] = useState('')
+  const [matchedCategories, setMatchedCategories] = useState([])
+  const [selectedSources, setSelectedSources] = useState([]) // sources cochées
+  const [extraSources, setExtraSources] = useState('') // sources manuelles ajoutées
+  const [finalKeywords, setFinalKeywords] = useState([])
   const [previewArticles, setPreviewArticles] = useState([])
   const [loadingPreview, setLoadingPreview] = useState(false)
 
   const handle = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
-  // Étape 2 : appel Claude pour générer sources RSS + mots-clés
-  const generate = async () => {
-    if (!form.name.trim() || !form.description.trim()) {
-      setError('Donne un nom et une description à ta veille.')
+  // ── Étape 1 → 2 : analyse automatique de la thématique ──
+  const analyze = () => {
+    if (!form.name.trim()) {
+      setError('Donne un nom à ta veille.')
+      return
+    }
+    if (!form.description.trim() && !form.keywords.trim()) {
+      setError('Décris ta thématique ou donne au moins quelques mots-clés.')
       return
     }
     setError('')
+
+    const userKw = form.keywords.split(',').map(k => k.trim()).filter(Boolean)
+    const matched = matchCategories(form.description, userKw)
+    const sources = suggestSources(matched, 10)
+    const keywords = suggestKeywords(matched, userKw)
+
+    setMatchedCategories(matched)
+    setSelectedSources(sources)
+    setFinalKeywords(keywords)
     setStep(2)
 
-    const prompt = `Tu es un expert en veille informationnelle et en flux RSS.
-
-L'utilisateur veut créer une veille sur le sujet suivant :
-- Nom : "${form.name}"
-- Description : "${form.description}"
-- Mots-clés fournis : "${form.keywords || 'aucun'}"
-- Langue préférée : ${form.language === 'fr' ? 'Français' : 'Anglais ou Français'}
-
-Ta mission : générer une configuration de veille optimale.
-
-Réponds UNIQUEMENT en JSON valide, sans texte avant ni après, sans backticks :
-{
-  "keywords": ["mot1", "mot2", "mot3", "mot4", "mot5", "mot6", "mot7", "mot8"],
-  "sources": [
-    { "url": "https://...", "name": "Nom de la source" },
-    { "url": "https://...", "name": "Nom de la source" },
-    { "url": "https://...", "name": "Nom de la source" }
-  ],
-  "summary": "Une phrase résumant la veille générée."
-}
-
-Règles :
-- 6 à 10 mots-clés pertinents en minuscules
-- 3 à 6 sources RSS réelles, accessibles, en rapport direct avec le sujet (préfère des médias français si langue=fr)
-- Les URLs doivent être des flux RSS valides (se terminent souvent par /feed, /rss, /rss.xml, /feed.xml, .rss)
-- Pas de sources inventées : utilise uniquement des médias connus et fiables`
-
-    try {
-      const res = await fetch('/api/claude', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{ role: 'user', content: prompt }]
-        })
-      })
-      const data = await res.json()
-      const text = data.content?.find(b => b.type === 'text')?.text || ''
-      const json = JSON.parse(text.replace(/```json|```/g, '').trim())
-      setGenerated(json)
-      setStep(3)
-      // Lancer le preview des flux
-      fetchPreview(json.sources, json.keywords)
-    } catch (e) {
-      setError('Erreur lors de la génération. Vérifie ta connexion et réessaie.')
-      setStep(1)
+    if (sources.length > 0) {
+      fetchPreview(sources, keywords)
     }
   }
 
+  const toggleSource = (source) => {
+    setSelectedSources(prev => {
+      const exists = prev.some(s => s.url === source.url)
+      const next = exists ? prev.filter(s => s.url !== source.url) : [...prev, source]
+      fetchPreview(next, finalKeywords)
+      return next
+    })
+  }
+
   const fetchPreview = async (sources, keywords) => {
+    if (sources.length === 0) {
+      setPreviewArticles([])
+      return
+    }
     setLoadingPreview(true)
     const all = []
     await Promise.allSettled(
@@ -214,7 +206,6 @@ Règles :
         } catch {}
       })
     )
-    // Dédupliquer + scorer + trier
     const seen = new Set()
     const unique = all.filter(a => {
       const k = a.link || a.title
@@ -231,71 +222,94 @@ Règles :
     setLoadingPreview(false)
   }
 
+  // Sources additionnelles saisies manuellement (format Nom|URL, une par ligne)
+  const getExtraSources = () => extraSources.split('\n').map(line => {
+    const [name, ...rest] = line.split('|')
+    return { name: name?.trim(), url: rest.join('|')?.trim() }
+  }).filter(s => s.name && s.url)
+
+  const applyExtraSources = () => {
+    const extras = getExtraSources()
+    if (extras.length === 0) return
+    const next = [...selectedSources, ...extras.filter(e => !selectedSources.some(s => s.url === e.url))]
+    setSelectedSources(next)
+    setExtraSources('')
+    fetchPreview(next, finalKeywords)
+  }
+
+  const removeSource = (url) => {
+    const next = selectedSources.filter(s => s.url !== url)
+    setSelectedSources(next)
+    fetchPreview(next, finalKeywords)
+  }
+
   const save = () => {
+    if (selectedSources.length === 0) {
+      setError('Sélectionne au moins une source.')
+      return
+    }
     onCreate({
       name: form.name,
       description: form.description,
       color: form.color,
-      language: form.language,
-      keywords: generated.keywords,
-      sources: generated.sources,
-      summary: generated.summary,
+      keywords: finalKeywords,
+      sources: selectedSources,
     })
   }
 
-  // ── STEP 1 : FORMULAIRE ──
+  // Toutes les sources disponibles dans les catégories matchées (pour cocher/décocher)
+  const availableSources = (() => {
+    const all = matchedCategories.flatMap(c => c.sources.map(s => ({ ...s, category: c.category })))
+    const seen = new Set()
+    return all.filter(s => {
+      if (seen.has(s.url)) return false
+      seen.add(s.url); return true
+    })
+  })()
+
+  // ── STEP 1 : QUESTIONNAIRE ──
   if (step === 1) return (
     <div className="mvi-wizard">
       <div className="mvi-wizard-header">
         <h2 className="mvi-wizard-title">Créer une nouvelle veille</h2>
-        <p className="mvi-wizard-sub">Décris ta thématique librement — Claude génère les sources RSS et les mots-clés pour toi.</p>
+        <p className="mvi-wizard-sub">Décris ta thématique — le système trouve automatiquement des sources RSS pertinentes et des mots-clés de scoring.</p>
       </div>
 
       <div className="mvi-wizard-form">
         <div className="mvi-field">
           <label>Nom de la veille <span className="mvi-required">*</span></label>
-          <input name="name" value={form.name} onChange={handle} placeholder="ex : Marché du luxe en Asie" />
+          <input name="name" value={form.name} onChange={handle} placeholder="ex : Judo — Compétitions & Actualités" />
         </div>
 
         <div className="mvi-field">
-          <label>Décris ta thématique <span className="mvi-required">*</span></label>
+          <label>Décris ta thématique <span className="mvi-optional">(recommandé)</span></label>
           <textarea
             name="description"
             value={form.description}
             onChange={handle}
             rows={4}
-            placeholder="ex : Je veux suivre l'évolution du secteur du luxe (LVMH, Hermès, Kering) sur les marchés asiatiques, notamment Chine et Japon. Focus sur les ventes, tendances consommateurs et stratégies des marques."
+            placeholder="ex : Je veux suivre l'actualité du judo, les résultats de compétitions, les classements IJF et les actualités de la Fédération Française de Judo."
           />
-          <span className="mvi-field-hint">Plus c'est précis, meilleure sera la veille générée.</span>
+          <span className="mvi-field-hint">Plus c'est précis, meilleures seront les sources trouvées.</span>
         </div>
 
         <div className="mvi-field">
           <label>Mots-clés supplémentaires <span className="mvi-optional">(optionnel)</span></label>
-          <input name="keywords" value={form.keywords} onChange={handle} placeholder="ex : LVMH, Hermès, luxe, Chine, consommateurs" />
-          <span className="mvi-field-hint">Séparés par des virgules.</span>
+          <input name="keywords" value={form.keywords} onChange={handle} placeholder="ex : judo, ijf, tatami, ippon, grand slam" />
+          <span className="mvi-field-hint">Séparés par des virgules. Aide à affiner la recherche de sources et le scoring.</span>
         </div>
 
-        <div className="mvi-field-row">
-          <div className="mvi-field">
-            <label>Langue des sources</label>
-            <select name="language" value={form.language} onChange={handle}>
-              <option value="fr">Français en priorité</option>
-              <option value="both">Français + Anglais</option>
-            </select>
-          </div>
-
-          <div className="mvi-field">
-            <label>Couleur de la veille</label>
-            <div className="mvi-color-picker">
-              {WATCH_COLORS.map(c => (
-                <button
-                  key={c}
-                  className={`mvi-color-dot${form.color === c ? ' selected' : ''}`}
-                  style={{ background: c }}
-                  onClick={() => setForm(f => ({ ...f, color: c }))}
-                />
-              ))}
-            </div>
+        <div className="mvi-field">
+          <label>Couleur de la veille</label>
+          <div className="mvi-color-picker">
+            {WATCH_COLORS.map(c => (
+              <button
+                key={c}
+                className={`mvi-color-dot${form.color === c ? ' selected' : ''}`}
+                style={{ background: c }}
+                onClick={() => setForm(f => ({ ...f, color: c }))}
+              />
+            ))}
           </div>
         </div>
 
@@ -303,41 +317,16 @@ Règles :
 
         <div className="mvi-wizard-actions">
           <button className="mvi-btn-ghost" onClick={onCancel}>Annuler</button>
-          <button className="mvi-btn-generate" onClick={generate}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-            </svg>
-            Générer ma veille avec Claude
+          <button className="mvi-btn-generate" onClick={analyze}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Trouver mes sources
           </button>
         </div>
       </div>
     </div>
   )
 
-  // ── STEP 2 : GÉNÉRATION ──
-  if (step === 2) return (
-    <div className="mvi-wizard">
-      <div className="mvi-generating">
-        <div className="mvi-gen-animation">
-          <div className="mvi-gen-ring" />
-          <div className="mvi-gen-ring mvi-gen-ring-2" />
-          <span className="mvi-gen-icon">✦</span>
-        </div>
-        <h3 className="mvi-gen-title">Claude analyse ta thématique…</h3>
-        <p className="mvi-gen-sub">Sélection des meilleures sources RSS · Définition des mots-clés · Configuration du scoring</p>
-        <div className="mvi-gen-steps">
-          {['Analyse de la thématique', 'Recherche de sources RSS', 'Optimisation des mots-clés'].map((s, i) => (
-            <div key={i} className="mvi-gen-step">
-              <div className="mvi-gen-step-dot" style={{ animationDelay: `${i * 0.4}s` }} />
-              <span>{s}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-
-  // ── STEP 3 : PREVIEW ──
+  // ── STEP 2 : PREVIEW & SÉLECTION DES SOURCES ──
   return (
     <div className="mvi-wizard mvi-wizard-preview">
       <div className="mvi-preview-header">
@@ -345,17 +334,25 @@ Règles :
           <span className="mvi-preview-color-dot" style={{ background: form.color }} />
           <h2 className="mvi-preview-title">{form.name}</h2>
         </div>
-        <p className="mvi-preview-summary">{generated?.summary}</p>
+        {matchedCategories.length > 0 ? (
+          <p className="mvi-preview-summary">
+            Thématiques détectées : {matchedCategories.slice(0, 3).map(c => c.category).join(', ')}
+          </p>
+        ) : (
+          <p className="mvi-preview-summary mvi-preview-summary-warn">
+            Aucune thématique reconnue automatiquement — ajoute tes propres sources RSS ci-dessous.
+          </p>
+        )}
       </div>
 
       <div className="mvi-preview-config">
         <div className="mvi-preview-section">
           <h4 className="mvi-preview-section-title">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            {generated?.keywords?.length} mots-clés de scoring
+            {finalKeywords.length} mots-clés de scoring
           </h4>
           <div className="mvi-keyword-list">
-            {generated?.keywords?.map(k => (
+            {finalKeywords.map(k => (
               <span key={k} className="mvi-keyword-pill">{k}</span>
             ))}
           </div>
@@ -364,18 +361,51 @@ Règles :
         <div className="mvi-preview-section">
           <h4 className="mvi-preview-section-title">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
-            {generated?.sources?.length} sources RSS
+            {selectedSources.length} source{selectedSources.length !== 1 ? 's' : ''} sélectionnée{selectedSources.length !== 1 ? 's' : ''}
           </h4>
-          <div className="mvi-source-list">
-            {generated?.sources?.map(s => (
-              <div key={s.url} className="mvi-source-item">
-                <span className="mvi-source-dot" style={{ background: form.color }} />
-                <div>
-                  <strong>{s.name}</strong>
-                  <span>{s.url}</span>
-                </div>
+
+          {availableSources.length > 0 ? (
+            <div className="mvi-source-checklist">
+              {availableSources.map(s => {
+                const checked = selectedSources.some(sel => sel.url === s.url)
+                return (
+                  <label key={s.url} className="mvi-source-check-item">
+                    <input type="checkbox" checked={checked} onChange={() => toggleSource(s)} />
+                    <div>
+                      <strong>{s.name}</strong>
+                      <span>{s.category}</span>
+                    </div>
+                  </label>
+                )
+              })}
+            </div>
+          ) : (
+            <p className="mvi-field-hint">Aucune source trouvée automatiquement.</p>
+          )}
+
+          {/* Sources sélectionnées hors bibliothèque (ajoutées manuellement) */}
+          {selectedSources.filter(s => !availableSources.some(a => a.url === s.url)).map(s => (
+            <div key={s.url} className="mvi-source-item mvi-source-item-manual">
+              <span className="mvi-source-dot" style={{ background: form.color }} />
+              <div>
+                <strong>{s.name}</strong>
+                <span>{s.url}</span>
               </div>
-            ))}
+              <button className="mvi-source-remove" onClick={() => removeSource(s.url)}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+          ))}
+
+          <div className="mvi-add-source-row">
+            <textarea
+              value={extraSources}
+              onChange={e => setExtraSources(e.target.value)}
+              rows={2}
+              placeholder="Ajouter une source manuelle : Nom|https://url/du/flux/rss"
+              style={{ fontFamily: 'monospace', fontSize: '0.76rem' }}
+            />
+            <button className="mvi-btn-ghost" onClick={applyExtraSources}>Ajouter</button>
           </div>
         </div>
       </div>
@@ -393,7 +423,7 @@ Règles :
         ) : previewArticles.length === 0 ? (
           <div className="mvi-preview-empty">
             <span>📭</span>
-            <p>Aucun article récent trouvé — les flux seront rechargés une fois la veille créée.</p>
+            <p>Aucun article récent trouvé — sélectionne au moins une source ci-dessus.</p>
           </div>
         ) : (
           <div className="mvi-preview-art-list">
@@ -410,6 +440,8 @@ Règles :
           </div>
         )}
       </div>
+
+      {error && <p className="mvi-error" style={{ margin: '0 1.4rem 1rem' }}>{error}</p>}
 
       <div className="mvi-preview-footer">
         <button className="mvi-btn-ghost" onClick={() => setStep(1)}>← Modifier</button>
@@ -458,7 +490,7 @@ function WatchView({ watch, onEdit, onDelete, favorites, onToggleFav }) {
     const recent = unique.filter(a => !a.pubDate || new Date(a.pubDate).getTime() > cutoff)
     const pool = recent.length > 0 ? recent : unique
     const scored = pool
-      .map(a => ({ ...a, relevanceScore: scoreArticle(a, watch.keywords || []), watchId: watch.id }))
+      .map(a => ({ ...a, relevanceScore: scoreArticle(a, watch.keywords || []), watchId: watch.id, watchName: watch.name, watchColor: watch.color }))
       .sort((a, b) => b.relevanceScore - a.relevanceScore)
     setArticles(scored)
     setLoading(false)
@@ -466,7 +498,7 @@ function WatchView({ watch, onEdit, onDelete, favorites, onToggleFav }) {
 
   const refresh = () => { hasFetched.current = false; load() }
 
-  const isFav = a => favorites.some(f => (f.id || f.link) === (a.id || a.link))
+  const isFav = a => favorites.some(f => getArticleKey(f) === getArticleKey(a))
 
   const displayed = (() => {
     let pool = [...articles]
@@ -664,7 +696,7 @@ function EditModal({ watch, onSave, onClose }) {
 
 // ─── PAGE PRINCIPALE ───────────────────────────────────────────────────────────
 export default function MaVeille() {
-  const { user, login } = useAuth()
+  const { user } = useAuth()
   const [watches, setWatches] = useState([])
   const [activeWatchId, setActiveWatchId] = useState(null)
   const [view, setView] = useState('list') // 'list' | 'create' | 'watch'
@@ -739,10 +771,10 @@ export default function MaVeille() {
   }
 
   const toggleFavorite = async (article) => {
-    const artKey = article.id || article.link
-    const isFav = favorites.some(f => (f.id || f.link) === artKey)
+    const artKey = getArticleKey(article)
+    const isFav = favorites.some(f => getArticleKey(f) === artKey)
     const next = isFav
-      ? favorites.filter(f => (f.id || f.link) !== artKey)
+      ? favorites.filter(f => getArticleKey(f) !== artKey)
       : [...favorites, { ...article, savedAt: new Date().toISOString() }]
     setFavorites(next)
     showToast(isFav ? '✓ Retiré des favoris' : '★ Ajouté aux favoris !')
@@ -752,7 +784,6 @@ export default function MaVeille() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ favorites: next })
       })
-      login({ ...user, favorites: next })
     } catch { setFavorites(favorites) }
   }
 
@@ -923,6 +954,20 @@ const css = `
   .mvi-wizard-sub { font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.6; }
   .mvi-wizard-form { display: flex; flex-direction: column; gap: 1.2rem; }
 
+  /* Checklist sources */
+  .mvi-source-checklist { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; max-height: 220px; overflow-y: auto; }
+  .mvi-source-check-item { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 7px; cursor: pointer; transition: background 0.12s; }
+  .mvi-source-check-item:hover { background: var(--color-accent-muted); }
+  .mvi-source-check-item input { width: 16px; height: 16px; accent-color: var(--color-accent); cursor: pointer; flex-shrink: 0; }
+  .mvi-source-check-item strong { font-size: 0.82rem; font-weight: 600; color: var(--color-text); display: block; }
+  .mvi-source-check-item span { font-size: 0.7rem; color: var(--color-text-muted); }
+  .mvi-source-item-manual { padding: 8px; background: var(--color-bg); border-radius: 8px; margin-bottom: 6px; align-items: center; }
+  .mvi-source-remove { background: none; border: none; cursor: pointer; color: var(--color-text-muted); padding: 4px; border-radius: 6px; flex-shrink: 0; transition: all 0.15s; }
+  .mvi-source-remove:hover { background: #FEF2F2; color: #DC2626; }
+  .mvi-add-source-row { display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; }
+  .mvi-add-source-row textarea { flex: 1; }
+  .mvi-preview-summary-warn { color: #B45309; }
+
   .mvi-field { display: flex; flex-direction: column; gap: 5px; }
   .mvi-field label { font-size: 0.8rem; font-weight: 600; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.04em; }
   .mvi-field input, .mvi-field textarea, .mvi-field select { background: var(--color-surface); border: 1.5px solid var(--color-border); border-radius: 8px; padding: 10px 14px; font-size: 0.92rem; font-family: var(--font-body); color: var(--color-text); outline: none; transition: border-color 0.2s; resize: vertical; }
@@ -944,18 +989,6 @@ const css = `
   .mvi-btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
   .mvi-btn-generate { display: flex; align-items: center; gap: 8px; background: var(--color-accent); color: white; border: none; border-radius: 8px; padding: 11px 22px; font-size: 0.92rem; font-weight: 500; font-family: var(--font-body); cursor: pointer; transition: background 0.15s; }
   .mvi-btn-generate:hover { background: var(--color-accent-light); }
-
-  /* ── GENERATING ── */
-  .mvi-generating { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 1.5rem; text-align: center; }
-  .mvi-gen-animation { position: relative; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; }
-  .mvi-gen-ring { position: absolute; inset: 0; border-radius: 50%; border: 2.5px solid var(--color-accent); border-top-color: transparent; animation: mvi-spin 1.2s linear infinite; }
-  .mvi-gen-ring-2 { inset: 10px; border-color: var(--color-accent-light); border-bottom-color: transparent; animation-direction: reverse; animation-duration: 0.8s; }
-  .mvi-gen-icon { font-size: 1.5rem; color: var(--color-accent); }
-  .mvi-gen-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--color-text); }
-  .mvi-gen-sub { font-size: 0.85rem; color: var(--color-text-muted); max-width: 380px; line-height: 1.6; }
-  .mvi-gen-steps { display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; }
-  .mvi-gen-step { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: var(--color-text-muted); }
-  .mvi-gen-step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent); animation: mvi-pulse 1.2s infinite; }
 
   /* ── PREVIEW ── */
   .mvi-preview-header { padding: 2rem 2rem 1.2rem; border-bottom: 1px solid var(--color-border); }
@@ -1011,7 +1044,7 @@ const css = `
   .mvi-sort-btn:last-child { border-right: none; }
   .mvi-sort-btn.active { color: white; }
 
-  .mvi-articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+  .mvi-articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
   .mvi-card { background: var(--color-surface); border: 1.5px solid var(--color-border); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s; }
   .mvi-card:hover { border-color: var(--watch-color, var(--color-accent-light)); box-shadow: 0 4px 16px rgba(0,0,0,0.07); transform: translateY(-2px); }
   .mvi-card:active { transform: translateY(0); }
