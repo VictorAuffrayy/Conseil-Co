@@ -3,7 +3,7 @@ import { useAuth } from '../AuthContext'
 import Navbar from '../components/Navbar'
 import { fetchArticlesForTopic, invalidateTopicCache } from '../services/rssService'
 
-const API = 'http://localhost:3001'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
 const CATEGORY_COLORS = {
   'Tech':       { bg: '#EEF2FF', text: '#3730A3', border: '#C7D2FE' },

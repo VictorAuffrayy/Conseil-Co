@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../AuthContext'
 
-const API = 'http://localhost:3001'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
 export default function Register() {
   const navigate = useNavigate()
@@ -35,8 +35,6 @@ export default function Register() {
         role: 'user',
         subscriptions: [],
         favorites: [],
-        emailAlerts: false,
-        seenArticleKeys: [],
         createdAt: new Date().toISOString()
       }
       const create = await fetch(`${API}/users`, {

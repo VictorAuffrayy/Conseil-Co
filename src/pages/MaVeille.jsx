@@ -3,7 +3,7 @@ import { useAuth } from '../AuthContext'
 import Navbar from '../components/Navbar'
 import { matchCategories, suggestKeywords, suggestSources } from '../services/sourceLibrary'
 
-const API = 'http://localhost:3001'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 const CORS_PROXY = 'https://corsproxy.io/?'
 
 // ─── PARSE RSS ────────────────────────────────────────────────────────────────
@@ -490,7 +490,7 @@ function WatchView({ watch, onEdit, onDelete, favorites, onToggleFav }) {
     const recent = unique.filter(a => !a.pubDate || new Date(a.pubDate).getTime() > cutoff)
     const pool = recent.length > 0 ? recent : unique
     const scored = pool
-      .map(a => ({ ...a, relevanceScore: scoreArticle(a, watch.keywords || []), watchId: watch.id, watchName: watch.name, watchColor: watch.color }))
+      .map(a => ({ ...a, relevanceScore: scoreArticle(a, watch.keywords || []), watchId: watch.id }))
       .sort((a, b) => b.relevanceScore - a.relevanceScore)
     setArticles(scored)
     setLoading(false)
@@ -1044,7 +1044,7 @@ const css = `
   .mvi-sort-btn:last-child { border-right: none; }
   .mvi-sort-btn.active { color: white; }
 
-  .mvi-articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+  .mvi-articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
   .mvi-card { background: var(--color-surface); border: 1.5px solid var(--color-border); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s; }
   .mvi-card:hover { border-color: var(--watch-color, var(--color-accent-light)); box-shadow: 0 4px 16px rgba(0,0,0,0.07); transform: translateY(-2px); }
   .mvi-card:active { transform: translateY(0); }
