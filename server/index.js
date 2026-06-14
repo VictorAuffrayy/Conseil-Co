@@ -185,6 +185,33 @@ async function runAlertCheck() {
 
 // ── ROUTES ────────────────────────────────────────────────────────────────────
 
+// ── PROXY RSS ─────────────────────────────────────────────────────────────────
+// Le front appelle GET /proxy-rss?url=https://... au lieu d'appeler directement
+// le flux RSS (qui serait bloqué par CORS côté navigateur).
+// Côté serveur il n'y a pas de restriction CORS → ça marche toujours.
+app.get('/proxy-rss', async (req, res) => {
+  const { url } = req.query
+  if (!url) return res.status(400).json({ error: 'Paramètre url manquant' })
+
+  try {
+    const response = await fetch(decodeURIComponent(url), {
+      signal: AbortSignal.timeout(15000),
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; ConseilAndCoBot/1.0; +https://conseil-co.vercel.app)',
+        'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+      },
+    })
+    if (!response.ok) return res.status(response.status).json({ error: `HTTP ${response.status}` })
+
+    const xml = await response.text()
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8')
+    res.setHeader('Cache-Control', 'public, max-age=900') // cache 15 min
+    res.send(xml)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+})
+
 // Vérification manuelle pour un utilisateur spécifique (utile pour tester)
 app.post('/check-alerts/:userId', async (req, res) => {
   try {
