@@ -224,20 +224,57 @@ function scoreArticle(article, topicId) {
 // --- FETCH PRINCIPAL ---
 async function fetchRSSSource(sourceUrl, sourceName) {
   let lastErr
-  for (const buildUrl of CORS_PROXIES) {
-    try {
-      const res = await fetch(buildUrl(sourceUrl), { signal: AbortSignal.timeout(10000) })
-      if (!res.ok) throw new Error('HTTP ' + res.status)
-      const text = await res.text()
-      if (text.trim().startsWith('<') || text.trim().startsWith('{')) {
-        return parseRSS(text, sourceName)
+
+  // 1. allorigins.win — retourne { contents: "xml..." }
+  try {
+    const url = `https://api.allorigins.win/get?url=${encodeURIComponent(sourceUrl)}`
+    const res = await fetch(url, { signal: AbortSignal.timeout(12000) })
+    if (res.ok) {
+      const json = await res.json()
+      if (json.contents && json.contents.trim().startsWith('<')) {
+        return parseRSS(json.contents, sourceName)
       }
-      throw new Error('Réponse invalide')
-    } catch(e) {
-      lastErr = e
     }
-  }
-  throw lastErr
+  } catch(e) { lastErr = e }
+
+  // 2. corsproxy.io — retourne le XML directement
+  try {
+    const url = `https://corsproxy.io/?${encodeURIComponent(sourceUrl)}`
+    const res = await fetch(url, { signal: AbortSignal.timeout(12000) })
+    if (res.ok) {
+      const text = await res.text()
+      if (text.trim().startsWith('<')) return parseRSS(text, sourceName)
+    }
+  } catch(e) { lastErr = e }
+
+  // 3. rss2json.com — convertit RSS en JSON
+  try {
+    const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(sourceUrl)}`
+    const res = await fetch(url, { signal: AbortSignal.timeout(12000) })
+    if (res.ok) {
+      const json = await res.json()
+      if (json.status === 'ok' && Array.isArray(json.items)) {
+        return json.items.map(item => ({
+          title: item.title || 'Sans titre',
+          link: item.link || '#',
+          description: (item.description || '').replace(/<[^>]*>/g, '').slice(0, 300),
+          fullDescription: (item.description || '').replace(/<[^>]*>/g, '').slice(0, 800),
+          pubDate: item.pubDate ? new Date(item.pubDate) : null,
+          pubDateFormatted: item.pubDate
+            ? new Date(item.pubDate).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+            : 'Date inconnue',
+          pubTimeFormatted: item.pubDate
+            ? new Date(item.pubDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+            : '',
+          source: sourceName,
+          category: item.categories?.[0] || '',
+          author: item.author || '',
+        }))
+      }
+    }
+  } catch(e) { lastErr = e }
+
+  throw lastErr || new Error('Tous les proxies ont échoué')
 }
 
 export async function fetchArticlesForTopic(topicId) {

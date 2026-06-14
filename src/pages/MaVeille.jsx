@@ -43,18 +43,43 @@ function parseRSS(xmlText, sourceName) {
 
 async function fetchRSSSource(url, name) {
   let lastErr
-  for (const buildUrl of CORS_PROXIES) {
-    try {
-      const res = await fetch(buildUrl(url), { signal: AbortSignal.timeout(12000) })
-      if (!res.ok) throw new Error('HTTP ' + res.status)
+  // 1. allorigins.win
+  try {
+    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, { signal: AbortSignal.timeout(12000) })
+    if (res.ok) {
+      const json = await res.json()
+      if (json.contents && json.contents.trim().startsWith('<')) return parseRSS(json.contents, name)
+    }
+  } catch(e) { lastErr = e }
+  // 2. corsproxy.io
+  try {
+    const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`, { signal: AbortSignal.timeout(12000) })
+    if (res.ok) {
       const text = await res.text()
-      if (text.trim().startsWith('<') || text.trim().startsWith('{')) {
-        return parseRSS(text, name)
+      if (text.trim().startsWith('<')) return parseRSS(text, name)
+    }
+  } catch(e) { lastErr = e }
+  // 3. rss2json
+  try {
+    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`, { signal: AbortSignal.timeout(12000) })
+    if (res.ok) {
+      const json = await res.json()
+      if (json.status === 'ok' && Array.isArray(json.items)) {
+        return json.items.map(item => ({
+          id: `art-${btoa(encodeURIComponent(item.link || item.title)).slice(0, 16)}`,
+          title: item.title || 'Sans titre',
+          link: item.link || '#',
+          description: (item.description || '').replace(/<[^>]*>/g, '').slice(0, 300),
+          fullDescription: (item.description || '').replace(/<[^>]*>/g, '').slice(0, 800),
+          pubDate: item.pubDate ? new Date(item.pubDate) : null,
+          pubDateFormatted: item.pubDate ? new Date(item.pubDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) : 'Date inconnue',
+          pubTimeFormatted: item.pubDate ? new Date(item.pubDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : '',
+          source: name, author: item.author || '',
+        }))
       }
-      throw new Error('Reponse invalide')
-    } catch(e) { lastErr = e }
-  }
-  throw lastErr
+    }
+  } catch(e) { lastErr = e }
+  throw lastErr || new Error('Tous les proxies ont echoue')
 }
 
 function scoreArticle(article, keywords) {
