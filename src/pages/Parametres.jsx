@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../AuthContext'
 import Navbar from '../components/Navbar'
 
-const API = 'http://localhost:3001'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
 export default function Parametres() {
   const { user, login } = useAuth()
