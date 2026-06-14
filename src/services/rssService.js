@@ -2,12 +2,11 @@ const CACHE_KEY = 'ca_rss_cache'
 const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24h
 const API = 'http://localhost:3001'
 
-// Proxies CORS en cascade — si le premier échoue on essaie le suivant
-const CORS_PROXIES = [
-  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  url => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
-]
+// URL du proxy RSS côté serveur (évite les restrictions CORS des proxies publics)
+// En prod : pointe vers le serveur Render. En local : fallback sur allorigins.
+const RSS_PROXY = import.meta.env.VITE_PROXY_URL
+  ? `${import.meta.env.VITE_PROXY_URL}/proxy-rss`
+  : null
 
 export const TOPIC_SOURCES = {
   't01': [
@@ -225,7 +224,19 @@ function scoreArticle(article, topicId) {
 async function fetchRSSSource(sourceUrl, sourceName) {
   let lastErr
 
-  // 1. allorigins.win — retourne { contents: "xml..." }
+  // 1. Proxy serveur Render (prioritaire en prod — pas de CORS, fiable)
+  if (RSS_PROXY) {
+    try {
+      const url = `${RSS_PROXY}?url=${encodeURIComponent(sourceUrl)}`
+      const res = await fetch(url, { signal: AbortSignal.timeout(15000) })
+      if (res.ok) {
+        const xml = await res.text()
+        if (xml.trim().startsWith('<')) return parseRSS(xml, sourceName)
+      }
+    } catch(e) { lastErr = e }
+  }
+
+  // 2. allorigins.win (fallback local / si Render endormi)
   try {
     const url = `https://api.allorigins.win/get?url=${encodeURIComponent(sourceUrl)}`
     const res = await fetch(url, { signal: AbortSignal.timeout(12000) })
@@ -237,17 +248,7 @@ async function fetchRSSSource(sourceUrl, sourceName) {
     }
   } catch(e) { lastErr = e }
 
-  // 2. corsproxy.io — retourne le XML directement
-  try {
-    const url = `https://corsproxy.io/?${encodeURIComponent(sourceUrl)}`
-    const res = await fetch(url, { signal: AbortSignal.timeout(12000) })
-    if (res.ok) {
-      const text = await res.text()
-      if (text.trim().startsWith('<')) return parseRSS(text, sourceName)
-    }
-  } catch(e) { lastErr = e }
-
-  // 3. rss2json.com — convertit RSS en JSON
+  // 3. rss2json.com (dernier recours)
   try {
     const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(sourceUrl)}`
     const res = await fetch(url, { signal: AbortSignal.timeout(12000) })
@@ -274,7 +275,7 @@ async function fetchRSSSource(sourceUrl, sourceName) {
     }
   } catch(e) { lastErr = e }
 
-  throw lastErr || new Error('Tous les proxies ont échoué')
+  throw lastErr || new Error('Tous les proxies ont échoué pour ' + sourceUrl)
 }
 
 export async function fetchArticlesForTopic(topicId) {

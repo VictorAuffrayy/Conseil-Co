@@ -4,11 +4,9 @@ import Navbar from '../components/Navbar'
 import { matchCategories, suggestKeywords, suggestSources } from '../services/sourceLibrary'
 
 const API = 'http://localhost:3001'
-const CORS_PROXIES = [
-  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  url => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
-]
+const RSS_PROXY = import.meta.env.VITE_PROXY_URL
+  ? `${import.meta.env.VITE_PROXY_URL}/proxy-rss`
+  : null
 
 // ─── PARSE RSS ────────────────────────────────────────────────────────────────
 function parseRSS(xmlText, sourceName) {
@@ -43,7 +41,17 @@ function parseRSS(xmlText, sourceName) {
 
 async function fetchRSSSource(url, name) {
   let lastErr
-  // 1. allorigins.win
+  // 1. Proxy serveur Render (prioritaire en prod)
+  if (RSS_PROXY) {
+    try {
+      const res = await fetch(`${RSS_PROXY}?url=${encodeURIComponent(url)}`, { signal: AbortSignal.timeout(15000) })
+      if (res.ok) {
+        const xml = await res.text()
+        if (xml.trim().startsWith('<')) return parseRSS(xml, name)
+      }
+    } catch(e) { lastErr = e }
+  }
+  // 2. allorigins.win (fallback)
   try {
     const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, { signal: AbortSignal.timeout(12000) })
     if (res.ok) {
@@ -51,15 +59,7 @@ async function fetchRSSSource(url, name) {
       if (json.contents && json.contents.trim().startsWith('<')) return parseRSS(json.contents, name)
     }
   } catch(e) { lastErr = e }
-  // 2. corsproxy.io
-  try {
-    const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`, { signal: AbortSignal.timeout(12000) })
-    if (res.ok) {
-      const text = await res.text()
-      if (text.trim().startsWith('<')) return parseRSS(text, name)
-    }
-  } catch(e) { lastErr = e }
-  // 3. rss2json
+  // 3. rss2json (dernier recours)
   try {
     const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`, { signal: AbortSignal.timeout(12000) })
     if (res.ok) {
