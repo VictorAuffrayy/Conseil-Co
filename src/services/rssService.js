@@ -1,9 +1,13 @@
 const CACHE_KEY = 'ca_rss_cache'
 const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24h
-const API = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+const API = 'http://localhost:3001'
 
-// Proxy CORS gratuit qui fonctionne bien
-const CORS_PROXY = 'https://corsproxy.io/?'
+// Proxies CORS en cascade — si le premier échoue on essaie le suivant
+const CORS_PROXIES = [
+  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
+]
 
 export const TOPIC_SOURCES = {
   't01': [
@@ -219,11 +223,21 @@ function scoreArticle(article, topicId) {
 
 // --- FETCH PRINCIPAL ---
 async function fetchRSSSource(sourceUrl, sourceName) {
-  const proxied = CORS_PROXY + encodeURIComponent(sourceUrl)
-  const res = await fetch(proxied, { signal: AbortSignal.timeout(8000) })
-  if (!res.ok) throw new Error('HTTP ' + res.status)
-  const text = await res.text()
-  return parseRSS(text, sourceName)
+  let lastErr
+  for (const buildUrl of CORS_PROXIES) {
+    try {
+      const res = await fetch(buildUrl(sourceUrl), { signal: AbortSignal.timeout(10000) })
+      if (!res.ok) throw new Error('HTTP ' + res.status)
+      const text = await res.text()
+      if (text.trim().startsWith('<') || text.trim().startsWith('{')) {
+        return parseRSS(text, sourceName)
+      }
+      throw new Error('Réponse invalide')
+    } catch(e) {
+      lastErr = e
+    }
+  }
+  throw lastErr
 }
 
 export async function fetchArticlesForTopic(topicId) {
@@ -272,7 +286,7 @@ export async function fetchArticlesForTopic(topicId) {
 
   // 5. Sinon fallback db.json (articles statiques)
   try {
-    const res = await fetch(`${API}/articles?topicId=${topicId}&_sort=relevanceScore&_order=desc&_limit=6`)
+    const res = await fetch(`http://localhost:3001/articles?topicId=${topicId}&_sort=relevanceScore&_order=desc&_limit=6`)
     const dbArticles = await res.json()
     // Convertir les articles db pour correspondre au format
     const formatted = dbArticles.map(a => ({

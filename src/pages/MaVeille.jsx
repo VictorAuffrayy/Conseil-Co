@@ -3,8 +3,12 @@ import { useAuth } from '../AuthContext'
 import Navbar from '../components/Navbar'
 import { matchCategories, suggestKeywords, suggestSources } from '../services/sourceLibrary'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:3001'
-const CORS_PROXY = 'https://corsproxy.io/?'
+const API = 'http://localhost:3001'
+const CORS_PROXIES = [
+  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
+]
 
 // ─── PARSE RSS ────────────────────────────────────────────────────────────────
 function parseRSS(xmlText, sourceName) {
@@ -38,9 +42,19 @@ function parseRSS(xmlText, sourceName) {
 }
 
 async function fetchRSSSource(url, name) {
-  const res = await fetch(CORS_PROXY + encodeURIComponent(url), { signal: AbortSignal.timeout(8000) })
-  if (!res.ok) throw new Error('HTTP ' + res.status)
-  return parseRSS(await res.text(), name)
+  let lastErr
+  for (const buildUrl of CORS_PROXIES) {
+    try {
+      const res = await fetch(buildUrl(url), { signal: AbortSignal.timeout(12000) })
+      if (!res.ok) throw new Error('HTTP ' + res.status)
+      const text = await res.text()
+      if (text.trim().startsWith('<') || text.trim().startsWith('{')) {
+        return parseRSS(text, name)
+      }
+      throw new Error('Reponse invalide')
+    } catch(e) { lastErr = e }
+  }
+  throw lastErr
 }
 
 function scoreArticle(article, keywords) {
