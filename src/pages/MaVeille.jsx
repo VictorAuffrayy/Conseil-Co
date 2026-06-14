@@ -3,7 +3,7 @@ import { useAuth } from '../AuthContext'
 import Navbar from '../components/Navbar'
 import { matchCategories, suggestKeywords, suggestSources } from '../services/sourceLibrary'
 
-const API = 'http://localhost:3001'
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 const RSS_PROXY = import.meta.env.VITE_PROXY_URL
   ? `${import.meta.env.VITE_PROXY_URL}/proxy-rss`
   : null
